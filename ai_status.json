@@ -2,11 +2,11 @@
   "updated": "2026-04-26",
   "agent": "Claude Sonnet 4.6",
   "branch": "master",
-  "git_sha": "d96e396e7f5a9faef1436abe7d8ebc68f3273a91",
+  "git_sha": "341b8a3217f241d3a6ad04566d2925343d8d1936",
   "worktree_state": "clean",
   "current_focus": "Repository documentation complete. Ready for content and config fixes.",
   "next_step": {
-    "description": "Fix _config.yml: remove duplicate permalink key and correct url value"
+    "description": "Fix _config.yml: (1) delete the redundant 'permalink: pretty' line (keep '/:title/'), (2) set url: to the actual deployed GitHub Pages URL \u2014 confirm with project owner before editing; current value 'http://elotroalex.github.io' is the upstream project's URL"
   },
   "blockers": [
     "Actual deployed URL for this site is unknown \u2014 confirm with project owner before editing url: in _config.yml"

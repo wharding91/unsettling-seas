@@ -3,6 +3,68 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-04-26 — Session 1 (Claude Code / claude-sonnet-4-6)
+
+**Focus:** Repository audit, documentation overhaul, and multi-agent handoff scaffolding.
+
+### Files changed
+
+| File | Action | Commit |
+|---|---|---|
+| `README.md` | Rewritten — replaced two-line upstream placeholder with full project docs | `ffd48dd` |
+| `TODO.md` | Created — 13 actionable follow-up items from repo audit | `c53241a` |
+| `AI_CONTEXT.md` | Created — primary context file for AI agents | `d96e396` |
+| `AI_WORK_LOG.md` | Created — this file | `d96e396` |
+| `ai_status.json` | Created — machine-readable state; SHA updated to `341b8a3` this handoff | `d96e396` |
+| `CLAUDE.md` | Created — thin Claude Code wrapper | `d96e396` |
+| `AGENTS.md` | Created — thin Codex wrapper | `d96e396` |
+| `GEMINI.md` | Created — thin Gemini CLI wrapper | `d96e396` |
+| `scripts/update_ai_handoff.py` | Created — CLI helper for handoff state management | `f121bad` |
+| `README.md` | Updated — added AI handoff section and scripts/ to repo tree | `341b8a3` |
+
+### Commands run
+
+```bash
+# Git inspection
+git status && git log --oneline -20 && git remote -v
+
+# File reads (no writes to source files)
+# _config.yml, Gemfile, Gemfile.lock, Rakefile, ed..gemspec,
+# LICENSE.md, .travis.yml, _layouts/*.html, _includes/*.html,
+# _writers/*.md, _texts/**/*.md, _bibliography/adisa/books.bib,
+# index.html, search.html, zot-to-jekyll.rb, README.md
+
+# Smoke tests for update_ai_handoff.py
+python scripts/update_ai_handoff.py --status
+python scripts/update_ai_handoff.py --update-sha
+python scripts/update_ai_handoff.py --next-step "..."
+python scripts/update_ai_handoff.py --log "Smoke-tested..."
+
+# Commits and push (5 commits this session)
+git add ... && git commit && git push origin master  # × 5
+```
+
+### Validations
+
+- `jekyll build`: not run
+- `htmlproofer`: not run
+- `bundle install`: not run
+- `update_ai_handoff.py` flags (`--status`, `--update-sha`, `--next-step`, `--log`): pass
+
+### Pre-existing dirty state (not touched)
+
+- `README_REVISED.md` — deleted in working tree before session began; left unstaged
+- `.claude/` — Claude Code internal directory; not committed
+
+### Outcome
+
+Full repo audit identified 13 issues across configuration, dependencies, content, and legal categories — all captured in `TODO.md`. README was rewritten from a two-line upstream placeholder to comprehensive project documentation. The multi-agent handoff system (`AI_CONTEXT.md`, `AI_WORK_LOG.md`, `ai_status.json`, wrapper files, and `scripts/update_ai_handoff.py`) was initialized and documented in the README. No source code, playbooks, or content files were modified.
+
+### Next step
+
+Fix `_config.yml`: delete the redundant `permalink: pretty` line (keep `/:title/`) and set `url:` to the actual deployed GitHub Pages URL. **Confirm the deployed URL with the project owner before editing** — the current value (`http://elotroalex.github.io`) is the upstream project's URL. Once confirmed: open `_config.yml`, remove line 23 (`permalink: pretty`), and update line 8 (`url:`).
+
+---
 ## 2026-04-26 — session note
 
 **Branch:** master @ d96e396e7f5a
