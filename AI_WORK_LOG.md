@@ -3,6 +3,21 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-04-26 — Claude Code (claude-sonnet-4-6)
+
+Renamed default branch from `master` to `main`.
+
+**Steps taken:**
+- `git branch -m master main` — renamed local branch
+- `git push -u origin main` — pushed new branch, set upstream tracking
+- `gh repo edit --default-branch main` — updated GitHub default branch
+- `git push origin --delete master` — removed old remote branch
+- Updated `CLAUDE.md`, `AI_CONTEXT.md`, `ai_status.json` to reference `main`
+- Historical entries in `AI_WORK_LOG.md` left intact (they accurately reflect the branch name at the time)
+
+**Branch:** `main` @ `0f091e2`
+
+---
 ## 2026-04-26 — relay-handoff (Codex)
 
 Closed out a maintenance cleanup session on `master`.

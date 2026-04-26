@@ -9,7 +9,7 @@ Claude Code entry point. Read these files in order before starting any work:
 
 ## Claude-specific notes
 
-- Branch: `master`. Direct commits are normal for this repo — no PR workflow.
+- Branch: `main`. Direct commits are normal for this repo — no PR workflow.
 - Deploy command: `bundle exec rake ed:publish` (builds locally, force-pushes `_site/` to `gh-pages`).
 - Do not modify source code files outside the scope of the current task.
 - `jekyll-scholar` is not on the GitHub Pages allowlist — the local Rake deploy is intentional.

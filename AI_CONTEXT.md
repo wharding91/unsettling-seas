@@ -21,7 +21,7 @@ for cross-agent handoff.
 **Type:** Jekyll static site — digital humanities bibliography
 **Editor:** Warren Harding
 **Remote:** https://github.com/ccarvel/jekyll-site-theme
-**Branch:** master (direct commits; no PR workflow)
+**Branch:** main (direct commits; no PR workflow)
 **Upstream:** https://github.com/elotroalex/bib-pollock (Ed theme origin — do not merge from upstream)
 
 ## Tech stack
