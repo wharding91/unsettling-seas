@@ -3,6 +3,49 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-04-26 — relay-handoff (Codex)
+
+Closed out a maintenance cleanup session on `master`.
+
+**Completed:**
+- Removed duplicate `_config.yml` permalink key and pushed `0405f9d`.
+- Deleted stale `.travis.yml`, committed `Gemfile.lock`, added `*.docx` ignore coverage, removed `website proofing.docx` from git tracking, added homepage "coming soon" labels for Herrera, Morejón, Philip, Ríos, and Trouillot, and pushed `c188901`.
+- Integrated remote `32a8110` (`Delete README_REVISED.md`) by rebasing the local cleanup commit before pushing.
+- Updated `TODO.md` to mark completed permalink, Travis, Gemfile.lock, placeholder-writer, and Word-document tasks.
+
+**Validation:**
+- `bundle exec jekyll build` passed after both cleanup commits.
+- Known warnings remain: RubyGems constant redefinition warnings and Sass `@import` deprecation warnings.
+- `htmlproofer` was not run.
+
+**Current repo state:**
+- `master` is aligned with `origin/master` at `c188901`.
+- Local uncommitted files are Relay metadata edits (`AI_CONTEXT.md`, `AI_WORK_LOG.md`, `ai_status.json`) plus untracked `.claude/`.
+- `website proofing.docx` exists locally as an ignored file and is no longer tracked by git.
+
+**Next step:** Confirm the deployed GitHub Pages URL with the project owner before editing `_config.yml` `url:`.
+
+---
+## 2026-04-26 — Codex
+
+Ran relay-init repair pass after existing handoff setup; confirmed Relay files and wrappers exist, updated AI_CONTEXT.md schema notes, and refreshed ai_status.json after the permalink fix commit.
+
+**Completed:**
+- Confirmed existing Relay handoff files and wrappers
+- Updated AI_CONTEXT.md with explicit relay-init sections and repo-local Relay commands
+- Refreshed ai_status.json after pushed permalink cleanup
+
+**Files touched:**
+- `AI_CONTEXT.md`
+- `AI_WORK_LOG.md`
+- `ai_status.json`
+- Pre-existing, not touched by this pass: `README_REVISED.md` deletion and `.claude/`
+
+**Worktree:** dirty; includes relay metadata edits plus pre-existing `README_REVISED.md` deletion and `.claude/`
+**Branch:** `master` @ `0405f9d`
+**Next step:** Confirm the deployed GitHub Pages URL with the project owner before editing `_config.yml` `url:`.
+
+---
 ## 2026-04-26 — Session 1 (Claude Code / claude-sonnet-4-6)
 
 **Focus:** Repository audit, documentation overhaul, and multi-agent handoff scaffolding.

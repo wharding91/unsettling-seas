@@ -2,6 +2,19 @@
 
 Repository context for AI agents. Read this file first, then AI_WORK_LOG.md, then ai_status.json.
 
+## Repo type
+
+Unsettling Seas is a Jekyll static site for a digital humanities bibliography:
+Caribbean women's and feminist creative writing, 1989–2001. It uses the Ed
+theme and Jekyll Scholar to publish writer profiles and BibTeX-backed
+bibliography pages.
+
+## Primary AI tool
+
+Codex and Claude Code are both used on this repository. Shared Relay files
+(`AI_CONTEXT.md`, `AI_WORK_LOG.md`, `ai_status.json`) are the source of truth
+for cross-agent handoff.
+
 ## Project identity
 
 **Name:** Unsettling Seas: Caribbean Women's and Feminist Creative Writing, 1989–2001
@@ -48,8 +61,8 @@ assets/css/             style.scss
 | Link/HTML validation | `bundle exec htmlproofer ./_site --only-4xx --check-favicon --check-html` |
 | Deploy to gh-pages | `bundle exec rake ed:publish` |
 | Normalize Zotero BibTeX | `bundle exec ruby zot-to-jekyll.rb` (edit `bib_file` var first) |
-| Show relay state | `update_relay_state --show` |
-| Update relay state | `update_relay_state --status --log --summary "..." --tool "..." --next-step "..."` |
+| Show relay state | `python scripts/update_relay_state.py --show` |
+| Update relay state | `python scripts/update_relay_state.py --status --log --summary "..." --tool "..." --next-step "..."` |
 
 ## Collections
 
@@ -83,6 +96,16 @@ Bibliography pages use one Liquid tag: `{% bibliography --file <writer>/<type> %
 - Any file containing API keys or credentials
 - `archive/` PDFs (in .gitignore)
 - `*.pdf`, `*.docx` (in .gitignore — note: `website proofing.docx` is currently tracked, needs removal)
+
+## Critical constraints
+
+- Do not run `bundle exec rake ed:publish` unless explicitly asked; it
+  force-pushes to the live `gh-pages` branch.
+- Do not merge from the upstream Ed theme repository without explicit sign-off.
+- Do not edit `_config.yml` `url:` until the deployed GitHub Pages URL is
+  confirmed by the project owner.
+- Do not commit unrelated dirty work such as the pre-existing
+  `README_REVISED.md` deletion or `.claude/` directory unless requested.
 
 ## Read order for new agents
 
