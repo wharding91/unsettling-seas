@@ -1,24 +1,31 @@
 #!/usr/bin/env python3
 """
-update_ai_handoff.py — manage AI agent handoff state for Unsettling Seas.
+update_ai_handoff.py — manage AI agent handoff state files.
 
-Reads and writes three files in the repo root:
+Reads and writes three files in the nearest git repo root above cwd:
   ai_status.json  — machine-readable current state
   AI_WORK_LOG.md  — append-only session log (new entries prepended)
   AI_CONTEXT.md   — read-only by this script (for reference)
 
-Usage
------
-  python scripts/update_ai_handoff.py --status
-  python scripts/update_ai_handoff.py --next-step "Fix _config.yml url: value"
-  python scripts/update_ai_handoff.py --log "Fixed duplicate permalink key in _config.yml"
-  python scripts/update_ai_handoff.py --append-log
-  python scripts/update_ai_handoff.py --update-sha
-  python scripts/update_ai_handoff.py --blocker "Waiting on deployed URL confirmation"
-  python scripts/update_ai_handoff.py --clear-blockers
+Can be invoked as a repo-local script or from a global PATH install.
+Repo root is detected by walking up from the current working directory.
 
-Flags may be combined, e.g.:
-  python scripts/update_ai_handoff.py --update-sha --next-step "Add Herrera writer profile"
+Usage (global install)
+----------------------
+  update_ai_handoff --status
+  update_ai_handoff --next-step "Fix _config.yml url: value"
+  update_ai_handoff --log "Fixed duplicate permalink key in _config.yml"
+  update_ai_handoff --append-log
+  update_ai_handoff --update-sha
+  update_ai_handoff --blocker "Waiting on deployed URL confirmation"
+  update_ai_handoff --clear-blockers
+
+Usage (repo-local)
+------------------
+  python scripts/update_ai_handoff.py --status
+  python scripts/update_ai_handoff.py --update-sha --next-step "..." --status
+
+Flags may be combined in a single invocation.
 """
 
 import argparse
@@ -43,7 +50,7 @@ def find_repo_root(start: Path) -> Path:
     raise RuntimeError(f"No git repository found above {start}")
 
 
-REPO_ROOT = find_repo_root(Path(__file__))
+REPO_ROOT = find_repo_root(Path.cwd())
 STATUS_FILE = REPO_ROOT / "ai_status.json"
 WORK_LOG = REPO_ROOT / "AI_WORK_LOG.md"
 
