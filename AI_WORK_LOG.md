@@ -3,6 +3,58 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-04-26 — Session 2 (Claude Code / claude-sonnet-4-6)
+
+**Focus:** Relay pickup, branch rename, README documentation, local dev verification.
+
+### Files changed
+
+| File | Action | Commit |
+|---|---|---|
+| `AI_CONTEXT.md` | Synced Codex session edits (repo-type section, corrected relay commands, critical constraints) | `0f091e2` |
+| `AI_WORK_LOG.md` | Synced two Codex session entries | `0f091e2` |
+| `ai_status.json` | Updated sha, focus, open_tasks, completed_this_session | `0f091e2` |
+| `CLAUDE.md` | Updated branch reference master → main | `b7ed3da` |
+| `AI_CONTEXT.md` | Updated branch reference master → main | `b7ed3da` |
+| `ai_status.json` | Updated branch field master → main | `b7ed3da` |
+| `AI_WORK_LOG.md` | Appended branch rename event entry | `b7ed3da` |
+| `README.md` | Added "Adding a new author" section | `0f3e7fd` |
+
+### Commands run
+
+```bash
+# Relay pickup
+python scripts/update_relay_state.py --show
+
+# Commit pending Codex relay metadata
+git add AI_CONTEXT.md AI_WORK_LOG.md ai_status.json && git commit && git push origin main
+
+# Branch rename
+git branch -m master main
+git push -u origin main
+gh repo edit ccarvel/jekyll-site-theme --default-branch main
+git push origin --delete master
+
+# Local dev server (background, then stopped)
+bundle exec jekyll serve
+kill $(lsof -ti:4000)
+```
+
+### Validations
+
+- jekyll serve: pass (site served at http://127.0.0.1:4000 without errors)
+- htmlproofer: not run
+- jekyll build (standalone): not run
+
+### Outcome
+
+Committed three sessions' worth of pending relay metadata, renamed the default branch from `master` to `main` across git, GitHub, and all relay files, and added a detailed "Adding a new author" how-to section to README.md. Local dev server confirmed the build is healthy. No source files were modified.
+
+### Next step
+
+Confirm the deployed GitHub Pages URL with Warren Harding, then update `url:` in `_config.yml`.
+
+---
 ## 2026-04-26 — Claude Code (claude-sonnet-4-6)
 
 Renamed default branch from `master` to `main`.

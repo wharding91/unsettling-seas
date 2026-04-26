@@ -1,10 +1,10 @@
 {
   "last_updated": "2026-04-26",
-  "last_session": "Codex (via update_relay_state.py)",
+  "last_session": "Claude Code (claude-sonnet-4-6)",
   "branch": "main",
-  "git_sha": "c188901",
-  "worktree_state": "3 unstaged, 1 untracked",
-  "current_focus": "Maintenance cleanup committed and pushed. Remaining work is config, content, metadata, and legal cleanup.",
+  "git_sha": "0f3e7fd",
+  "worktree_state": "clean (2 untracked tooling dirs: .claude/, .omx/)",
+  "current_focus": "Housekeeping and documentation complete. Remaining work is config, content, metadata, and legal cleanup.",
   "exact_next_step": "Confirm the deployed GitHub Pages URL with the project owner before editing _config.yml url:.",
   "blockers": [
     {
@@ -36,7 +36,11 @@
     "Refreshed ai_status.json after pushed permalink cleanup",
     "Removed duplicate permalink key from _config.yml and pushed commit 0405f9d",
     "Deleted stale .travis.yml, committed Gemfile.lock, untracked website proofing.docx, added homepage coming-soon labels, and pushed commit c188901",
-    "Rebased local cleanup commit over remote README_REVISED.md deletion commit 32a8110"
+    "Rebased local cleanup commit over remote README_REVISED.md deletion commit 32a8110",
+    "Committed pending Codex relay metadata (AI_CONTEXT.md, AI_WORK_LOG.md, ai_status.json) — commit 0f091e2",
+    "Renamed default branch master → main (git + GitHub default + file references) — commit b7ed3da",
+    "Added 'Adding a new author' section to README.md — commit 0f3e7fd",
+    "Verified local dev server (bundle exec jekyll serve) builds and serves correctly"
   ],
   "relay_version": "0.1.0",
   "todo_file": "TODO.md",
