@@ -65,6 +65,11 @@ Not on the GitHub Pages allowlist: `jekyll-scholar` requires local build or a cu
 ├── search.html             # Client-side search page
 ├── atom.xml                # RSS feed
 ├── zot-to-jekyll.rb        # Utility: normalizes Zotero-exported BibTeX keys/PDFs
+├── scripts/
+│   └── update_ai_handoff.py  # CLI helper for AI agent handoff state
+├── AI_CONTEXT.md           # AI agent context (repo overview, commands, conventions)
+├── AI_WORK_LOG.md          # Append-only AI session log
+├── ai_status.json          # Machine-readable current focus and next step
 └── LICENSE.md              # MIT (Ed theme)
 ```
 
@@ -176,6 +181,44 @@ Static assets:
 - `assets/banner_digital-scholarship.png` — institutional banner (currently commented out in sidebar)
 - `assets/open-graph-logo.png` — Open Graph / social sharing image
 - No external CDN dependencies except a jQuery 1.11.3 script tag in `search.html`
+
+## AI agent handoff
+
+This repo uses a lightweight multi-agent handoff system to preserve context across AI sessions. Three files at the repo root carry the state:
+
+| File | Purpose |
+|---|---|
+| `AI_CONTEXT.md` | Repo overview, commands, collection schemas, BibTeX conventions — read first |
+| `AI_WORK_LOG.md` | Append-only log of what each session did and decided |
+| `ai_status.json` | Current focus, exact next step, blockers, current git SHA |
+
+`scripts/update_ai_handoff.py` manages these files from the command line. It requires Python 3 and no external dependencies.
+
+```bash
+# Print current state
+python scripts/update_ai_handoff.py --status
+
+# Log what you did in a session (date and git SHA are added automatically)
+python scripts/update_ai_handoff.py --log "Fixed duplicate permalink key in _config.yml"
+
+# Set the next step for the following session
+python scripts/update_ai_handoff.py --next-step "Add Herrera writer profile and bibliography"
+
+# Sync the SHA in ai_status.json to the current HEAD
+python scripts/update_ai_handoff.py --update-sha
+
+# Add or clear blockers
+python scripts/update_ai_handoff.py --blocker "Waiting on confirmed deployed URL"
+python scripts/update_ai_handoff.py --clear-blockers
+
+# Open AI_WORK_LOG.md in $EDITOR for manual editing
+python scripts/update_ai_handoff.py --append-log
+
+# Flags compose — update SHA, set next step, and print status in one call
+python scripts/update_ai_handoff.py --update-sha --next-step "Write Morejón bio" --status
+```
+
+At the end of any AI session, run `--update-sha --log "<summary>" --next-step "<next>"` to leave a clean handoff for the next agent or collaborator.
 
 ## Contributing
 
