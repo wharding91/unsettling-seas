@@ -160,6 +160,114 @@ To normalize a Zotero export before adding entries, update `bib_file` in `zot-to
 bundle exec ruby zot-to-jekyll.rb
 ```
 
+## Adding a new author
+
+Adding an author requires four things: a writer profile page, two bibliography listing pages, and two BibTeX source files. The steps below use `herrera` as an example slug — replace it with the new author's lowercase last name.
+
+### 1. Create the BibTeX source files
+
+```
+_bibliography/herrera/books.bib
+_bibliography/herrera/articles.bib
+```
+
+Each file is a standard BibTeX file. Keys follow the pattern `lastname_shorttitle_year`:
+
+```bibtex
+@book{herrera_gatos_1995,
+  title     = {Gatos y liebres, o, Book of Heroes},
+  author    = {Herrera, Georgina},
+  year      = {1995},
+  publisher = {Ediciones Unión},
+  address   = {Havana},
+  annote    = {Optional annotation displayed below the citation.},
+}
+```
+
+Two extra fields are supported: `annote` (displayed as a note below the citation) and `file` (path to a PDF in `archive/`, rendered as a download link). All other standard BibTeX fields work normally. If you're exporting from Zotero, update `bib_file` in `zot-to-jekyll.rb` and run `bundle exec ruby zot-to-jekyll.rb` to normalize keys before saving.
+
+### 2. Create the bibliography listing pages
+
+```
+_texts/herrera/books.md
+_texts/herrera/articles.md
+```
+
+Each page has the same structure — just swap `title` and the `--file` argument:
+
+**`_texts/herrera/books.md`**
+```yaml
+---
+layout: page
+title: Books
+author: Georgina Herrera
+editor: Warren Harding
+---
+
+{% bibliography --file herrera/books %}
+```
+
+**`_texts/herrera/articles.md`**
+```yaml
+---
+layout: page
+title: Articles
+author: Georgina Herrera
+editor: Warren Harding
+---
+
+{% bibliography --file herrera/articles %}
+```
+
+### 3. Create the writer profile page
+
+```
+_writers/herrera.md
+```
+
+```html
+---
+layout: page
+title: "Georgina Herrera"
+---
+
+<hr>
+<p>Georgina Herrera (born 1936) is a Cuban poet...</p>
+
+<hr>
+<h2>Works by Category</h2>
+<ul class="texts">
+{% for item in site.texts %}
+  {% if item.path contains '_texts/herrera/' %}
+  <li class="text-title">
+    <a href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a>
+  </li>
+  {% endif %}
+{% endfor %}
+</ul>
+<hr>
+```
+
+The Liquid loop at the bottom auto-links to any `_texts/herrera/` pages, so no manual list maintenance is needed as categories are added.
+
+### 4. Verify locally
+
+```bash
+bundle exec jekyll serve
+```
+
+Navigate to the writer's profile page and confirm the bibliography links render. If a BibTeX file is empty or missing, Jekyll Scholar will output a blank page without erroring — double-check the `--file` path matches the actual filename.
+
+### File checklist
+
+```
+_bibliography/herrera/books.bib      ← BibTeX source
+_bibliography/herrera/articles.bib   ← BibTeX source
+_texts/herrera/books.md              ← bibliography listing page
+_texts/herrera/articles.md           ← bibliography listing page
+_writers/herrera.md                  ← writer profile page
+```
+
 ## Build & deployment
 
 There is no GitHub Actions workflow. Deployment uses a Rake task that builds the site locally and force-pushes the compiled `_site/` directory to the `gh-pages` branch on `origin`:
