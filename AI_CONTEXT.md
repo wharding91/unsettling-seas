@@ -48,6 +48,8 @@ assets/css/             style.scss
 | Link/HTML validation | `bundle exec htmlproofer ./_site --only-4xx --check-favicon --check-html` |
 | Deploy to gh-pages | `bundle exec rake ed:publish` |
 | Normalize Zotero BibTeX | `bundle exec ruby zot-to-jekyll.rb` (edit `bib_file` var first) |
+| Show relay state | `update_relay_state --show` |
+| Update relay state | `update_relay_state --status --log --summary "..." --tool "..." --next-step "..."` |
 
 ## Collections
 

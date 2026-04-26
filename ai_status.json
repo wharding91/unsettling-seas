@@ -1,30 +1,39 @@
 {
-  "updated": "2026-04-26",
-  "agent": "Claude Sonnet 4.6",
+  "last_updated": "2026-04-26",
+  "last_session": "Session 1 — Claude Sonnet 4.6",
   "branch": "master",
-  "git_sha": "341b8a3217f241d3a6ad04566d2925343d8d1936",
+  "git_sha": "b6c4390",
   "worktree_state": "clean",
   "current_focus": "Repository documentation complete. Ready for content and config fixes.",
-  "next_step": {
-    "description": "Fix _config.yml: (1) delete the redundant 'permalink: pretty' line (keep '/:title/'), (2) set url: to the actual deployed GitHub Pages URL \u2014 confirm with project owner before editing; current value 'http://elotroalex.github.io' is the upstream project's URL"
-  },
+  "exact_next_step": "Fix _config.yml: (1) delete the redundant 'permalink: pretty' line (keep '/:title/'), (2) set url: to the actual deployed GitHub Pages URL — confirm with project owner before editing; current value 'http://elotroalex.github.io' is the upstream project's URL",
   "blockers": [
-    "Actual deployed URL for this site is unknown \u2014 confirm with project owner before editing url: in _config.yml"
-  ],
-  "recent_commits": [
     {
-      "sha": "c53241a",
-      "message": "docs(todo): add TODO.md with follow-up issues from repo audit"
-    },
-    {
-      "sha": "ffd48dd",
-      "message": "docs(readme): rewrite README to reflect current Jekyll site state"
-    },
-    {
-      "sha": "4608aa5",
-      "message": "no more annotate in sidebar"
+      "id": "deployed-url",
+      "description": "Actual deployed URL is unknown — confirm with project owner before editing url: in _config.yml",
+      "severity": "medium",
+      "owner": "Warren Harding / project owner"
     }
   ],
-  "open_todos": 13,
+  "open_tasks": [
+    "Fix _config.yml (duplicate permalink, wrong url, missing references.bib)",
+    "Replace lorem ipsum in index.html, _writers/adisa.md, _writers/brand.md",
+    "Add stubs for 5 placeholder writers (Herrera, Morejón, Philip, Ríos, Trouillot)",
+    "Remove website proofing.docx from git tracking",
+    "Delete or replace stale .travis.yml",
+    "Remove Gemfile.lock from .gitignore",
+    "Update jQuery 1.11.3 in search.html",
+    "Add content license statement"
+  ],
+  "completed_this_session": [
+    "Full repository audit",
+    "Rewrote README.md",
+    "Created TODO.md with 13 follow-up items",
+    "Initialized multi-agent handoff system (AI_CONTEXT.md, AI_WORK_LOG.md, ai_status.json, CLAUDE.md, AGENTS.md, GEMINI.md)",
+    "Created and tested scripts/update_ai_handoff.py (superseded by update_relay_state.py)",
+    "Replaced update_ai_handoff.py with canonical update_relay_state.py",
+    "Updated install.sh in agent-relay to distribute script globally",
+    "Updated relay-init.md (claude-code + core) to copy script into repos"
+  ],
+  "relay_version": "0.1.0",
   "todo_file": "TODO.md"
 }

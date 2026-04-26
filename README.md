@@ -66,7 +66,7 @@ Not on the GitHub Pages allowlist: `jekyll-scholar` requires local build or a cu
 ├── atom.xml                # RSS feed
 ├── zot-to-jekyll.rb        # Utility: normalizes Zotero-exported BibTeX keys/PDFs
 ├── scripts/
-│   └── update_ai_handoff.py  # CLI helper for AI agent handoff state
+│   └── update_relay_state.py  # CLI helper for AI agent handoff state
 ├── AI_CONTEXT.md           # AI agent context (repo overview, commands, conventions)
 ├── AI_WORK_LOG.md          # Append-only AI session log
 ├── ai_status.json          # Machine-readable current focus and next step
@@ -192,33 +192,29 @@ This repo uses a lightweight multi-agent handoff system to preserve context acro
 | `AI_WORK_LOG.md` | Append-only log of what each session did and decided |
 | `ai_status.json` | Current focus, exact next step, blockers, current git SHA |
 
-`scripts/update_ai_handoff.py` manages these files from the command line. It requires Python 3 and no external dependencies.
+`scripts/update_relay_state.py` manages these files from the command line. It requires Python 3 and no external dependencies. It is also available globally as `update_relay_state` if the [relay skills](https://github.com/ccarvel/agent-relay) `install.sh` has been run.
 
 ```bash
 # Print current state
-python scripts/update_ai_handoff.py --status
+update_relay_state --show
 
-# Log what you did in a session (date and git SHA are added automatically)
-python scripts/update_ai_handoff.py --log "Fixed duplicate permalink key in _config.yml"
+# Refresh git state in ai_status.json
+update_relay_state --status --tool "Claude Code"
 
-# Set the next step for the following session
-python scripts/update_ai_handoff.py --next-step "Add Herrera writer profile and bibliography"
+# Set the next step
+update_relay_state --next-step "Add Herrera writer profile" --tool "Claude Code"
 
-# Sync the SHA in ai_status.json to the current HEAD
-python scripts/update_ai_handoff.py --update-sha
+# Append a session note to AI_WORK_LOG.md
+update_relay_state --log --summary "Fixed duplicate permalink key" --tool "Claude Code"
 
-# Add or clear blockers
-python scripts/update_ai_handoff.py --blocker "Waiting on confirmed deployed URL"
-python scripts/update_ai_handoff.py --clear-blockers
+# Refresh state and append log in one call (typical end-of-session)
+update_relay_state --status --log --summary "<what you did>" --tool "<agent>" --next-step "<next>"
 
-# Open AI_WORK_LOG.md in $EDITOR for manual editing
-python scripts/update_ai_handoff.py --append-log
-
-# Flags compose — update SHA, set next step, and print status in one call
-python scripts/update_ai_handoff.py --update-sha --next-step "Write Morejón bio" --status
+# Invoke as a repo-local script if not on PATH
+python scripts/update_relay_state.py --show
 ```
 
-At the end of any AI session, run `--update-sha --log "<summary>" --next-step "<next>"` to leave a clean handoff for the next agent or collaborator.
+At the end of any AI session, run `--status --log --summary "..." --next-step "..."` to leave a clean handoff for the next agent or collaborator.
 
 ## Contributing
 
