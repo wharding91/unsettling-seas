@@ -2,22 +2,28 @@
   "updated": "2026-04-26",
   "agent": "Claude Sonnet 4.6",
   "branch": "master",
-  "git_sha": "c53241a08d7f0f2aca3b928d34cf7ede66db3fe0",
+  "git_sha": "d96e396e7f5a9faef1436abe7d8ebc68f3273a91",
   "worktree_state": "clean",
   "current_focus": "Repository documentation complete. Ready for content and config fixes.",
   "next_step": {
-    "description": "Fix _config.yml: remove duplicate permalink key and correct url value",
-    "command": "Edit _config.yml: delete the `permalink: pretty` line (keep `/:title/`), and set `url:` to the actual deployed GitHub Pages URL for this project (e.g., https://ccarvel.github.io/jekyll-site-theme or the custom domain if one is configured).",
-    "file": "_config.yml",
-    "todo_item": "Fix duplicate permalink: key in _config.yml"
+    "description": "Fix _config.yml: remove duplicate permalink key and correct url value"
   },
   "blockers": [
-    "Actual deployed URL for this site is unknown — confirm with project owner before editing url: in _config.yml"
+    "Actual deployed URL for this site is unknown \u2014 confirm with project owner before editing url: in _config.yml"
   ],
   "recent_commits": [
-    { "sha": "c53241a", "message": "docs(todo): add TODO.md with follow-up issues from repo audit" },
-    { "sha": "ffd48dd", "message": "docs(readme): rewrite README to reflect current Jekyll site state" },
-    { "sha": "4608aa5", "message": "no more annotate in sidebar" }
+    {
+      "sha": "c53241a",
+      "message": "docs(todo): add TODO.md with follow-up issues from repo audit"
+    },
+    {
+      "sha": "ffd48dd",
+      "message": "docs(readme): rewrite README to reflect current Jekyll site state"
+    },
+    {
+      "sha": "4608aa5",
+      "message": "no more annotate in sidebar"
+    }
   ],
   "open_todos": 13,
   "todo_file": "TODO.md"

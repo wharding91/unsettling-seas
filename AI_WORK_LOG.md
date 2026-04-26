@@ -3,6 +3,14 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-04-26 — session note
+
+**Branch:** master @ d96e396e7f5a
+
+Smoke-tested update_ai_handoff.py — all flags working. SHA updated to d96e396.
+
+---
+
 
 ## 2026-04-26 — relay-init
 
