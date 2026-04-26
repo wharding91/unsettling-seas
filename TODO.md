@@ -4,7 +4,7 @@ Issues and improvements identified during repository audit (2026-04-26).
 
 ## Configuration
 
-- [ ] **Fix duplicate `permalink:` in `_config.yml`** — `pretty` (line 23) is immediately overridden by `/:title/` (line 25). Remove the `pretty` line to make intent explicit.
+- [x] **Fix duplicate `permalink:` in `_config.yml`** — `pretty` was immediately overridden by `/:title/`. Removed the `pretty` line in commit `0405f9d`.
 
 - [ ] **Fix `url:` in `_config.yml`** — currently set to `http://elotroalex.github.io` (the upstream bib-pollock project). Update to the actual deployed URL so Open Graph tags and canonical links resolve correctly.
 
@@ -12,9 +12,9 @@ Issues and improvements identified during repository audit (2026-04-26).
 
 ## Dependencies & CI
 
-- [ ] **Remove or replace `.travis.yml`** — the file targets Ruby 2.2.2, but the Gemfile requires `~> 3.4.0`. Travis CI is not active on this repo. Delete the file or replace it with a GitHub Actions workflow (`.github/workflows/`) that runs `bundle exec jekyll build` and `bundle exec htmlproofer`.
+- [x] **Remove or replace `.travis.yml`** — deleted stale Travis CI config. It targeted Ruby 2.2.2 while the project requires Ruby `~> 3.4.0`; Travis CI is not active on this repo.
 
-- [ ] **Remove `Gemfile.lock` from `.gitignore`** — locking the lockfile is recommended for deployed sites to ensure reproducible builds across collaborators and CI. Remove the `Gemfile.lock` entry from `.gitignore` and commit the lockfile.
+- [x] **Remove `Gemfile.lock` from `.gitignore`** — locking the lockfile is recommended for deployed sites to ensure reproducible builds across collaborators and CI. Removed the ignore entry and committed the lockfile.
 
 ## Content
 
@@ -22,11 +22,11 @@ Issues and improvements identified during repository audit (2026-04-26).
 
 - [ ] **Replace lorem ipsum in writer profiles** — `_writers/adisa.md` and `_writers/brand.md` each contain two paragraphs of dummy text after the opening biographical sentence. Replace with substantive biographical content.
 
-- [ ] **Add content for five placeholder writers** — Georgina Herrera, Nancy Morejón, M. Nourbese Philip, Soleida Ríos, and Évelyne Trouillot are listed on the homepage as plain text with no links. Either add writer profile and bibliography stubs for each, or add a visible "coming soon" / in-progress indication so the omission is intentional rather than broken.
+- [x] **Add content for five placeholder writers** — Georgina Herrera, Nancy Morejón, M. Nourbese Philip, Soleida Ríos, and Évelyne Trouillot now have visible "coming soon" labels on the homepage.
 
 ## Assets & Dependencies
 
-- [ ] **Remove `website proofing.docx` from git tracking** — a binary Word document is tracked in the repo. Add `*.docx` to `.gitignore` and remove the file from tracking with `git rm --cached "website proofing.docx"`.
+- [x] **Remove `website proofing.docx` from git tracking** — added `*.docx` to `.gitignore` and removed the Word document from git tracking.
 
 - [ ] **Update jQuery in `search.html`** — jQuery 1.11.3 is loaded from a Google CDN. This version is over a decade old and the external CDN creates an unnecessary dependency. Consider bundling a current version locally under `assets/js/` or replacing it with vanilla JS.
 
