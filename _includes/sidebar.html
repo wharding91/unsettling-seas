@@ -25,6 +25,14 @@
       {% endif %}
     {% endfor %}
 
+    {% assign writers_list = site.writers | sort:"title" %}
+    {% if writers_list.size > 0 %}
+      <span class="sidebar-nav-item" style="font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.6; padding-top: 1em; display: block;">Writers</span>
+      {% for writer in writers_list %}
+        <a class="sidebar-nav-item{% if page.url == writer.url %} active{% endif %}" href="{{ site.baseurl }}{{ writer.url }}">{{ writer.title }}</a>
+      {% endfor %}
+    {% endif %}
+
     <!-- The code below is used for manually entered links  -->
 
     <!-- <span style='cursor:pointer;' onclick="javascript:var hypothesis = document.createElement('script');
