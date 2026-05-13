@@ -3,6 +3,64 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-05-13 — Session 4 (Claude Code / claude-sonnet-4-6)
+
+**Focus:** Get the site live on GitHub Pages; fix deployment pipeline; fix image paths; improve sidebar; add robots.txt; write migration guide.
+
+### Files changed
+
+| File | Action | Commit |
+|---|---|---|
+| `_config.yml` | Updated `url:`, `baseurl:`, `scholar.relative:` for renamed repo; expanded `exclude:` list; added `migrating.md` to excludes | `b3b2568`, `6f5cfe5`, `de3cecc` |
+| `Rakefile` | Fixed `master` → `main` for gh-pages push (Git now defaults to `main`) | `12aca90` |
+| `.nojekyll` | Created to stop GitHub Pages re-running Jekyll on pre-built site | `6f5cfe5` |
+| `_writers/adisa.md` | Fixed hardcoded `/assets/` image path → `{{ site.baseurl }}/assets/` | `8fbace6` |
+| `_writers/brand.md` | Fixed hardcoded `/assets/` image path → `{{ site.baseurl }}/assets/` | `8fbace6` |
+| `_includes/sidebar.html` | Added `site.writers` loop with "Writers" section label | `04446c3` |
+| `robots.txt` | Created; disallows all crawlers while site is not ready for indexing | `168b4bd` |
+| `TODO.md` | Marked `url:` and `scholar.relative` fixes as complete | `8c2f5c3` |
+| `migrating.md` | Created 8-step guide for transferring repo to Warren's GitHub account | `8c2f5c3` |
+| `ai_status.json` | Updated session metadata, open tasks, blockers, completed list | uncommitted |
+| `AI_WORK_LOG.md` | Prepended this session 4 entry | uncommitted |
+
+### Commands run
+
+```bash
+# Rename repo (done in GitHub UI), then update config and remote
+git remote set-url origin https://github.com/ccarvel/warren-jekyll-site
+bundle exec rake ed:publish   # run multiple times after each fix
+
+# Diagnose Pages build failure
+gh run list --repo ccarvel/warren-jekyll-site --limit 5
+gh run view 25822646917 --repo ccarvel/warren-jekyll-site --log
+
+# DNS debugging
+nslookup ccarvel.github.io
+nslookup ccarvel.github.io 8.8.8.8
+
+# Git ops (representative — ran after each fix)
+git add <files> && git commit -m "..." && git push origin main
+```
+
+### Validations
+
+- Jekyll build: pass (no errors; Sass @import deprecation warnings are non-fatal)
+- gh-pages push: pass (forced update confirmed each deploy)
+- GitHub Pages build: pass (green Actions run after .nojekyll fix)
+- DNS resolution: pass on 8.8.8.8; local router cache lagged (user flushed)
+- Image paths: not visually confirmed by Claude (phone showed images loading after fix)
+- Sidebar writers links: not visually confirmed by Claude
+- htmlproofer: not run
+
+### Outcome
+
+The site is live and deployed at `https://ccarvel.github.io/warren-jekyll-site/`. The primary deployment blockers (wrong config URL, Rakefile using `master`, GitHub Pages re-running Jekyll) were diagnosed and fixed. Image paths, sidebar, and robots.txt are all corrected and deployed. A detailed migration guide (`migrating.md`) was written for transferring the repo to Warren's account. The repo still lives under `ccarvel` — the transfer is the next major action.
+
+### Next step
+
+Follow `migrating.md` step 1: initiate repo transfer at **github.com/ccarvel/warren-jekyll-site/settings → Danger Zone → Transfer repository**, entering Warren's GitHub username as the destination.
+
+---
 ## 2026-05-13 — Session 3 (Codex)
 
 **Focus:** Relay handoff only; no site source changes this session.
