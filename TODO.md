@@ -6,7 +6,7 @@ Issues and improvements identified during repository audit (2026-04-26).
 
 - [x] **Fix duplicate `permalink:` in `_config.yml`** — `pretty` was immediately overridden by `/:title/`. Removed the `pretty` line in commit `0405f9d`.
 
-- [ ] **Fix `url:` in `_config.yml`** — currently set to `http://elotroalex.github.io` (the upstream bib-pollock project). Update to the actual deployed URL so Open Graph tags and canonical links resolve correctly.
+- [x] **Fix `url:` in `_config.yml`** — updated to `https://ccarvel.github.io` with `baseurl: '/warren-jekyll-site'` in commit `b3b2568`. Will need to be updated again when the repo is transferred to Warren's GitHub account (see `migrating.md`).
 
 - [ ] **Fix missing `references.bib`** — `scholar.bibliography: references.bib` points to a file that does not exist in `_bibliography/`. Either create a combined bibliography file at that path or update the key to point to a file that exists. Without this, Jekyll Scholar's default bibliography context is broken.
 
@@ -34,6 +34,6 @@ Issues and improvements identified during repository audit (2026-04-26).
 
 - [ ] **Fix `fb:admins` in `_includes/head.html`** — the Open Graph tag `<meta property="fb:admins" content="elotroalex"/>` is an upstream artifact. Update or remove it.
 
-- [ ] **Fix `scholar.relative` in `_config.yml`** — currently points to `/ed/bibliography.html`, which is an upstream path that may not match this site's actual URL structure. Verify and update.
+- [x] **Fix `scholar.relative` in `_config.yml`** — updated from `/ed/bibliography.html` (upstream artifact) to `/warren-jekyll-site/bibliography.html` in commit `b3b2568`. Will need to be updated again after repo transfer (see `migrating.md`).
 
 - [ ] **Add a content license** — `LICENSE.md` covers only the Ed theme code (MIT, copyright Alex Gil). The bibliography data and editorial content have no stated license. Add a Creative Commons statement (e.g., CC BY 4.0) if the project intends to allow reuse, or note rights explicitly.
