@@ -3,6 +3,44 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-05-13 — Session 5 (Claude Code / claude-sonnet-4-6)
+
+**Focus:** Local directory rename only — no source file changes this session.
+
+### Files changed
+
+| File | Action | Commit |
+|---|---|---|
+| `ai_status.json` | Updated session metadata, local_directory field, completed list | uncommitted |
+| `AI_WORK_LOG.md` | Prepended this session 5 entry | uncommitted |
+
+### Commands run
+
+```bash
+mv /Users/codycarvel/Documents/GitHub/jekyll-site-theme \
+   /Users/codycarvel/Documents/GitHub/warren-jekyll-site
+
+git -C /Users/codycarvel/Documents/GitHub/warren-jekyll-site remote -v
+git -C /Users/codycarvel/Documents/GitHub/warren-jekyll-site status --short
+git -C /Users/codycarvel/Documents/GitHub/warren-jekyll-site log --oneline -3
+```
+
+### Validations
+
+- Git remote intact after rename: pass (origin → https://github.com/ccarvel/warren-jekyll-site)
+- Git status clean after rename: pass (only untracked .claude/, .omx/)
+- Jekyll build: not run
+- htmlproofer: not run
+
+### Outcome
+
+Single housekeeping action: renamed the local working directory from `jekyll-site-theme` to `warren-jekyll-site` to match the remote GitHub repo name. Git stores remote config inside `.git/config` and is not affected by the parent folder name — no reconfiguration was needed. No site source files were modified and no commits were made this session.
+
+### Next step
+
+Follow `migrating.md` step 1: initiate repo transfer at **github.com/ccarvel/warren-jekyll-site/settings → Danger Zone → Transfer repository**, entering Warren's GitHub username as destination.
+
+---
 ## 2026-05-13 — Session 4 (Claude Code / claude-sonnet-4-6)
 
 **Focus:** Get the site live on GitHub Pages; fix deployment pipeline; fix image paths; improve sidebar; add robots.txt; write migration guide.
