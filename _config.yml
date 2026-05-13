@@ -5,8 +5,8 @@
 title: 'Unsettling Seas'
 tagline: "Caribbean Women's and Feminist Creative Writing, 1989-2001"
 description: "Bibligraphic Resources for Caribbean Women's and Feminist Creative Writing, 1989-2001"
-url: 'http://elotroalex.github.io'
-baseurl: ''
+url: 'https://ccarvel.github.io'
+baseurl: '/warren-jekyll-site'
 incremental: true
 
 # About/contact
@@ -69,7 +69,7 @@ scholar:
   source: ./_bibliography
   bibliography: references.bib
   bibliography_template: bibliography
-  relative: "/ed/bibliography.html"
+  relative: "/warren-jekyll-site/bibliography.html"
 
   # bibtex_filters: markdown
 

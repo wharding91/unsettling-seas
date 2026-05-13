@@ -3,6 +3,53 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-05-13 — Session 3 (Codex)
+
+**Focus:** Relay handoff only; no site source changes this session.
+
+### Files changed
+
+| File | Action | Commit |
+|---|---|---|
+| `ai_status.json` | Updated session metadata, git SHA/worktree state, current focus, exact next step, and session-only completion list | uncommitted |
+| `AI_WORK_LOG.md` | Prepended this Session 3 handoff entry | uncommitted |
+
+### Commands run
+
+```bash
+# Inspect current state
+git branch --show-current
+git rev-parse --short HEAD
+git status --short
+git log --oneline -5
+
+# Read Relay/project context
+sed -n '1,220p' AI_CONTEXT.md
+sed -n '1,220p' ai_status.json
+sed -n '1,260p' AI_WORK_LOG.md
+sed -n '1,220p' TODO.md
+
+# Inspect helper and refresh status metadata
+sed -n '1,520p' scripts/update_relay_state.py
+python scripts/update_relay_state.py --next-step "Confirm the deployed GitHub Pages URL with Warren Harding before editing _config.yml url:." --tool "Codex"
+```
+
+### Validations
+
+- Relay state inspection: pass
+- Git status inspection: pass (`main` at `b63252c`; pre-handoff dirty state was only untracked `.claude/` and `.omx/`)
+- Jekyll build: not run
+- htmlproofer: not run
+
+### Outcome
+
+Closed the session by updating shared Relay state only. This session did not modify Jekyll source, content, config, dependencies, or generated site output. Pre-existing untracked tooling directories `.claude/` and `.omx/` remain untracked and were not added. The active blocker remains the unknown deployed GitHub Pages URL.
+
+### Next step
+
+Send Warren Harding this exact request before editing `_config.yml` `url:`: "Please confirm the deployed GitHub Pages URL for Unsettling Seas so I can update the Jekyll url setting."
+
+---
 ## 2026-04-26 — Session 2 (Claude Code / claude-sonnet-4-6)
 
 **Focus:** Relay pickup, branch rename, README documentation, local dev verification.
