@@ -47,6 +47,22 @@ kramdown:
 exclude:
   - optional
   - vendor
+  - Gemfile
+  - Gemfile.lock
+  - Rakefile
+  - README.md
+  - LICENSE.md
+  - TODO.md
+  - AGENTS.md
+  - CLAUDE.md
+  - GEMINI.md
+  - AI_CONTEXT.md
+  - AI_WORK_LOG.md
+  - ai_status.json
+  - scripts/
+  - "website proofing.docx"
+  - zot-to-jekyll.rb
+  - ed.gemspec
 
 # Theme
 theme: "ed."
