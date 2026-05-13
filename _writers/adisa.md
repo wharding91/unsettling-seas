@@ -6,7 +6,7 @@ title: "Opal Palmer Adisa"
 ---
 <hr>
 <div class="image">
-<img src="/assets/Prof-Opal-Adisa.jpeg" alt="A picture of Professor Opal Adisa." width="40%">
+<img src="{{ site.baseurl }}/assets/Prof-Opal-Adisa.jpeg" alt="A picture of Professor Opal Adisa." width="40%">
 <span class="caption">Credit: <a href="https://our.today/domestic-violence-causing-a-strain-on-the-healthcare-system-say-health-officials/">Our Today</a></span>
 </div>
 <p>Opal Palmer Adisa (born 6 November 1954) is a Jamaican and American poet, novelist, performance artist and educator...</p>

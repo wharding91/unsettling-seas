@@ -5,7 +5,7 @@ title: "Dionne Brand"
 ---
 <hr>
 <div class="image">
-<img src="/assets/Dionne-Brand_featured-image.jpg" alt="A picture of Dionne Brand." width="40%">
+<img src="{{ site.baseurl }}/assets/Dionne-Brand_featured-image.jpg" alt="A picture of Dionne Brand." width="40%">
 <span class="caption">Credit: <a href="http://bombmagazine.org/articles/2024/09/16/dionne-brand-by-saidiya-hartman/">Clea Christakos-Gee. Bomb Magazine</a></span>
 </div>
 <p>Dionne Brand CM FRSC (born 7 January 1953) is a Canadian poet, novelist, essayist and documentarian. </p>
