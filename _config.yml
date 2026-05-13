@@ -53,6 +53,7 @@ exclude:
   - README.md
   - LICENSE.md
   - TODO.md
+  - migrating.md
   - AGENTS.md
   - CLAUDE.md
   - GEMINI.md
