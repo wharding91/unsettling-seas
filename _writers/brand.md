@@ -2,6 +2,7 @@
 layout: writer
 title: "Dionne Brand"
 writer_id: brand
+sort_name: "Brand, Dionne"
 image: /assets/Dionne-Brand_featured-image.jpg
 image_alt: "Dionne Brand"
 image_credit: "Clea Christakos-Gee. Bomb Magazine"

@@ -120,10 +120,11 @@ Minimum front matter:
 layout: writer
 title: "Writer Name"
 writer_id: writer-slug
+sort_name: "Last, First Middle"
 ---
 ```
 
-`writer_id` must match the matching folder names under `_texts/` and `_bibliography/`. For example, `writer_id: brand` pulls bibliography category links from `_texts/brand/` into the profile infobox.
+`writer_id` must match the matching folder names under `_texts/` and `_bibliography/`. For example, `writer_id: brand` pulls bibliography category links from `_texts/brand/` into the profile infobox. `sort_name` controls writer ordering in the sidebar, so use last-name-first format.
 
 Optional infobox front matter:
 
@@ -253,6 +254,7 @@ _writers/herrera.md
 layout: writer
 title: "Georgina Herrera"
 writer_id: herrera
+sort_name: "Herrera, Georgina"
 image: /assets/georgina-herrera.jpg
 image_alt: "Georgina Herrera"
 image_credit: "Source name"

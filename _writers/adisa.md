@@ -1,31 +1,35 @@
 ---
-layout: page
+layout: writer
 title: "Opal Palmer Adisa"
-# writer: adisa
-
+writer_id: adisa
+sort_name: "Adisa, Opal Palmer"
+image: /assets/Prof-Opal-Adisa.jpeg
+image_alt: "Opal Palmer Adisa"
+image_credit: "Our Today"
+image_credit_url: "https://our.today/domestic-violence-causing-a-strain-on-the-healthcare-system-say-health-officials/"
+born: "6 November 1954"
+nationality: "Jamaican and American"
+forms:
+  - Poetry
+  - Fiction
+  - Performance
+  - Essays
+major_works:
+  - Traveling Women
+  - Tamarind and Mango Women
+  - It Begins with Tears
+  - Leaf-of-Life
+themes:
+  - Caribbean women's writing
+  - Gender justice
+  - Migration
+  - Memory
 ---
-<hr>
-<div class="image">
-<img src="{{ site.baseurl }}/assets/Prof-Opal-Adisa.jpeg" alt="A picture of Professor Opal Adisa." width="40%">
-<span class="caption">Credit: <a href="https://our.today/domestic-violence-causing-a-strain-on-the-healthcare-system-say-health-officials/">Our Today</a></span>
-</div>
-<p>Opal Palmer Adisa (born 6 November 1954) is a Jamaican and American poet, novelist, performance artist and educator...</p>
-<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam, similique veniam quae incidunt tempore nemo, iure necessitatibus perferendis officiis quod aliquam earum possimus dolorem, neque officia repellat doloremque iusto corrupti ad nostrum maxime recusandae nisi magni. Dolor aspernatur, eveniet dolorem fugit alias nihil voluptas, maxime vero minima excepturi quasi ex!</p>
-<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque minus expedita perspiciatis quos. Pariatur delectus impedit labore facilis quidem minima eos recusandae veritatis suscipit amet! Nisi cupiditate, doloribus veniam beatae impedit asperiores fuga ducimus deleniti, facere accusamus optio natus iusto a debitis sunt eum ratione dolore est quasi soluta laudantium?</p>
 
+Opal Palmer Adisa (born 6 November 1954) is a Jamaican and American poet, novelist, performance artist, essayist, and educator. Her work moves across poetry, fiction, and public-facing cultural criticism while returning to Caribbean women's lives, gendered violence, migration, memory, and community healing.
 
-<hr>
-<h2>Works by Category</h2>
-<ul class="texts">
-{% for item in site.texts %}
-  {% if item.path contains '_texts/adisa/' %}
-  <li class="text-title">
-    <a href="{{ site.baseurl }}{{ item.url }}">
-      {{ item.title }}
-    </a>
-  </li>
-  {% endif %}
-{% endfor %}
-</ul>
+Adisa's bibliography on this site gathers creative works from the 1989-2001 period alongside critical writing related to her work. The selected works listed here foreground poetry and fiction represented in the local BibTeX files for the project.
 
-<hr>
+## Literary Significance
+
+Adisa's writing is a key reference point for Caribbean feminist literary study. Her books from this period connect lyric, narrative, and activist concerns, making her profile a useful companion prototype to Dionne Brand's page for testing writer biographies, selected works, and bibliography links in the shared layout.
