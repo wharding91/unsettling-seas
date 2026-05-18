@@ -232,17 +232,12 @@ img {
  * Writer profiles
  */
 
-.writer-profile:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 .writer-infobox {
-  float: right;
-  width: 14rem;
-  margin: 0 0 1rem 1.5rem;
-  padding: .75rem;
+  display: grid;
+  grid-template-columns: minmax(9rem, 14rem) 1fr;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+  padding: .85rem;
   border: 1px solid #e5e5e5;
   background: #fafafa;
   font-size: .85rem;
@@ -252,14 +247,19 @@ img {
 .writer-infobox h2 {
   margin-top: 0;
   font-size: 1rem;
-  text-align: center;
 }
 
 .writer-infobox figure {
-  margin: 0 0 .75rem;
+  margin: 0;
 }
 
 .writer-infobox img {
+  /*
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 20%;
+  */
   margin-bottom: .4rem;
 }
 
@@ -286,14 +286,17 @@ img {
   padding-left: 1rem;
 }
 
-.writer-works {
+.writer-infobox-links {
+  list-style: circle;
+}
+
+.writer-body {
   clear: both;
 }
 
 @media (max-width: 38em) {
   .writer-infobox {
-    float: none;
-    width: 100%;
+    grid-template-columns: 1fr;
     margin: 0 0 1rem;
   }
 }

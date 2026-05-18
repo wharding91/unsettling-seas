@@ -5,6 +5,11 @@ layout: default
 <article class="page writer-page">
   <h1 class="page-title">{{ page.title }}</h1>
 
+  {% if page.writer_id %}
+  {% assign writer_text_path = "_texts/" | append: page.writer_id | append: "/" %}
+  {% assign writer_texts = site.texts | sort: "title" %}
+  {% endif %}
+
   <div class="writer-profile">
     {% include writer-infobox.html %}
 
@@ -12,22 +17,4 @@ layout: default
       {{ content }}
     </div>
   </div>
-
-  {% if page.writer_id %}
-  {% assign writer_text_path = "_texts/" | append: page.writer_id | append: "/" %}
-  {% assign writer_texts = site.texts | sort: "title" %}
-  <section class="writer-works" aria-labelledby="writer-works-heading">
-    <hr>
-    <h2 id="writer-works-heading">Works by Category</h2>
-    <ul class="texts">
-      {% for item in writer_texts %}
-      {% if item.path contains writer_text_path %}
-      <li class="text-title">
-        <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
-      </li>
-      {% endif %}
-      {% endfor %}
-    </ul>
-  </section>
-  {% endif %}
 </article>

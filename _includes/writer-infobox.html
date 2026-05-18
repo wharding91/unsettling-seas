@@ -1,4 +1,5 @@
 <aside class="writer-infobox" aria-labelledby="writer-infobox-heading">
+  <div class="writer-infobox-media">
   {% if page.image %}
   <figure class="writer-infobox-image">
     <img src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title }}">
@@ -14,39 +15,55 @@
     {% endif %}
   </figure>
   {% endif %}
+  </div>
 
-  <h2 id="writer-infobox-heading">{{ page.title }}</h2>
+  <div class="writer-infobox-details">
+    <h2 id="writer-infobox-heading">{{ page.title }}</h2>
 
-  <dl>
-    {% if page.born %}
-    <dt>Born</dt>
-    <dd>{{ page.born }}</dd>
-    {% endif %}
+    <dl>
+      {% if page.born %}
+      <dt>Born</dt>
+      <dd>{{ page.born }}</dd>
+      {% endif %}
 
-    {% if page.nationality %}
-    <dt>Nationality</dt>
-    <dd>{{ page.nationality }}</dd>
-    {% endif %}
+      {% if page.nationality %}
+      <dt>Nationality</dt>
+      <dd>{{ page.nationality }}</dd>
+      {% endif %}
 
-    {% if page.forms %}
-    <dt>Forms</dt>
-    <dd>{{ page.forms | join: ", " }}</dd>
-    {% endif %}
+      {% if page.forms %}
+      <dt>Forms</dt>
+      <dd>{{ page.forms | join: ", " }}</dd>
+      {% endif %}
 
-    {% if page.major_works %}
-    <dt>Selected works</dt>
-    <dd>
-      <ul>
-        {% for work in page.major_works %}
-        <li>{{ work }}</li>
+      {% if writer_texts %}
+      <dt>Bibliography</dt>
+      <dd>
+        <ul class="writer-infobox-links">
+        {% for item in writer_texts %}
+          {% if item.path contains writer_text_path %}
+          <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+          {% endif %}
         {% endfor %}
-      </ul>
-    </dd>
-    {% endif %}
+        </ul>
+      </dd>
+      {% endif %}
 
-    {% if page.themes %}
-    <dt>Subjects</dt>
-    <dd>{{ page.themes | join: ", " }}</dd>
-    {% endif %}
-  </dl>
+      {% if page.major_works %}
+      <dt>Selected works</dt>
+      <dd>
+        <ul>
+          {% for work in page.major_works %}
+          <li>{{ work }}</li>
+          {% endfor %}
+        </ul>
+      </dd>
+      {% endif %}
+
+      {% if page.themes %}
+      <dt>Subjects</dt>
+      <dd>{{ page.themes | join: ", " }}</dd>
+      {% endif %}
+    </dl>
+  </div>
 </aside>

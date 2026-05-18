@@ -41,7 +41,7 @@ Not on the GitHub Pages allowlist: `jekyll-scholar` requires local build or a cu
 ├── _layouts/
 │   ├── default.html        # Base layout: sidebar + masthead + content
 │   ├── page.html           # Standard page (extends default)
-│   ├── writer.html         # Writer profile layout: bio + infobox + works links
+│   ├── writer.html         # Writer profile layout: infobox + bio
 │   ├── bibliography.html   # Single Scholar entry with annotation/PDF link
 │   ├── poem.html           # Ed literary genre layouts (available, not yet in use)
 │   ├── narrative.html
@@ -123,7 +123,7 @@ writer_id: writer-slug
 ---
 ```
 
-`writer_id` must match the matching folder names under `_texts/` and `_bibliography/`. For example, `writer_id: brand` pulls bibliography category links from `_texts/brand/`.
+`writer_id` must match the matching folder names under `_texts/` and `_bibliography/`. For example, `writer_id: brand` pulls bibliography category links from `_texts/brand/` into the profile infobox.
 
 Optional infobox front matter:
 
@@ -147,7 +147,7 @@ themes:
 
 Only add fields that are verified. Empty or absent optional fields are omitted from the infobox automatically.
 
-The file body should contain the writer's narrative biography and any critical framing in Markdown. Do not add the "Works by Category" Liquid loop manually; `_layouts/writer.html` generates that section from `writer_id`.
+The file body should contain the writer's narrative biography and any critical framing in Markdown. Do not add the old "Works by Category" Liquid loop manually; `_layouts/writer.html` generates bibliography category links from `writer_id` and displays them in the top infobox.
 
 ### Bibliography pages (`_texts/<writer>/`)
 
@@ -275,7 +275,7 @@ Georgina Herrera (born 1936) is a Cuban poet...
 Add a short critical overview of the writer's themes, forms, and relevance to the project.
 ```
 
-The `writer` layout auto-links to any `_texts/herrera/` pages, so no manual list maintenance is needed as categories are added. If the portrait image or a fact such as birth date, nationality, or major works is not verified, omit that field until it is confirmed.
+The `writer` layout auto-links to any `_texts/herrera/` pages in the profile infobox, so no manual list maintenance is needed as categories are added. If the portrait image or a fact such as birth date, nationality, or major works is not verified, omit that field until it is confirmed.
 
 ### 4. Add the portrait image, if available
 
@@ -314,6 +314,8 @@ There is no GitHub Actions workflow. Deployment uses a Rake task that builds the
 ```bash
 bundle exec rake ed:publish
 ```
+
+Pushing to `main` updates the source code but does not update the live GitHub Pages site. After committing and pushing source changes, run `bundle exec rake ed:publish` to update `gh-pages`; GitHub's built-in Pages deployment then serves that prebuilt branch.
 
 This approach is required because `jekyll-scholar` is not on the GitHub Pages gem allowlist and cannot be used with the standard GH Pages build.
 
