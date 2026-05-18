@@ -6,7 +6,7 @@ Bibliographic resources for Caribbean women's and feminist creative writing, 198
 
 ## About the project
 
-*Unsettling Seas* is a digital humanities bibliography project documenting the creative and critical output of Caribbean women writers across the period 1989–2001. The site catalogs works by Opal Palmer Adisa, Dionne Brand, and five additional writers currently in development (Georgina Herrera, Nancy Morejón, M. Nourbese Philip, Soleida Ríos, Évelyne Trouillot). Each writer receives a profile page and per-category bibliography pages rendered from BibTeX source files via Jekyll Scholar. The project is edited by Warren Harding.
+*Unsettling Seas* is a bibliographic-generated digital humanities project that documents the creative and critical output of Caribbean women writers across the period 1989-2001. Employing the principles of minimal computing, the site currently catalogs the works of Opal Palmer Adisa, Dionne Brand, and five additional writers currently in development (Georgina Herrera, Nancy Morejón, M. NourbeSe Philip, Soleida Ríos, and Évelyne Trouillot) and will expand to at least one-hundred (100) writers. Each writer receives a profile page and per-category bibliography pages rendered from BibTeX source files via Jekyll Scholar that center the writers’ works. This digital humanities project seeks to extend a digital forum for the public, librarians, creative writers, scholars, archivists, students, and technologists to study how creative and critical writing were central in gender justice movements across Caribbean spaces (regionally and diasporically). The project is currently being edited by Warren Harding.
 
 ## Tech stack
 
