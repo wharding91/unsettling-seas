@@ -228,6 +228,76 @@ img {
   border-radius: 5px;
 }
 
+/*
+ * Writer profiles
+ */
+
+.writer-profile:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.writer-infobox {
+  float: right;
+  width: 14rem;
+  margin: 0 0 1rem 1.5rem;
+  padding: .75rem;
+  border: 1px solid #e5e5e5;
+  background: #fafafa;
+  font-size: .85rem;
+  line-height: 1.35;
+}
+
+.writer-infobox h2 {
+  margin-top: 0;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.writer-infobox figure {
+  margin: 0 0 .75rem;
+}
+
+.writer-infobox img {
+  margin-bottom: .4rem;
+}
+
+.writer-infobox figcaption {
+  font-size: .72rem;
+  line-height: 1.3;
+}
+
+.writer-infobox dl {
+  margin: 0;
+}
+
+.writer-infobox dt {
+  margin-top: .55rem;
+  font-weight: bold;
+}
+
+.writer-infobox dd {
+  margin: 0;
+}
+
+.writer-infobox dd ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.writer-works {
+  clear: both;
+}
+
+@media (max-width: 38em) {
+  .writer-infobox {
+    float: none;
+    width: 100%;
+    margin: 0 0 1rem;
+  }
+}
+
 /* Tables */
 table {
   margin-bottom: 1rem;

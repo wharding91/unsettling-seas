@@ -36,10 +36,12 @@ Not on the GitHub Pages allowlist: `jekyll-scholar` requires local build or a cu
 │   └── lectures.bib
 ├── _includes/
 │   ├── head.html           # <head>: Dublin Core, Open Graph, CSS/RSS links
-│   └── sidebar.html        # Toggleable nav sidebar
+│   ├── sidebar.html        # Toggleable nav sidebar
+│   └── writer-infobox.html # Writer profile infobox, driven by front matter
 ├── _layouts/
 │   ├── default.html        # Base layout: sidebar + masthead + content
 │   ├── page.html           # Standard page (extends default)
+│   ├── writer.html         # Writer profile layout: bio + infobox + works links
 │   ├── bibliography.html   # Single Scholar entry with annotation/PDF link
 │   ├── poem.html           # Ed literary genre layouts (available, not yet in use)
 │   ├── narrative.html
@@ -94,37 +96,58 @@ bundle install
 bundle exec jekyll serve
 ```
 
-The site is available at `http://127.0.0.1:4000`.
+The site is available at `http://127.0.0.1:4000/warren-jekyll-site/`.
 
 To validate links and markup after a build:
 
 ```bash
 bundle exec jekyll build
-bundle exec htmlproofer ./_site --only-4xx --check-favicon --check-html
+bundle exec htmlproofer ./_site --disable-external --swap-urls '^/warren-jekyll-site/:/'
 ```
+
+The `--swap-urls` option lets html-proofer resolve links that include the GitHub Pages `baseurl` while checking the local `_site/` directory. Remove `--disable-external` when you intentionally want to check outbound links too.
 
 ## Content authoring
 
 ### Writer profiles (`_writers/`)
 
-Each writer gets one Markdown file. Front-matter fields in use:
+Each writer gets one Markdown file. Use `layout: writer` for author pages. Dionne Brand's page (`_writers/brand.md`) is the current prototype.
+
+Minimum front matter:
 
 ```yaml
 ---
-layout: page
+layout: writer
 title: "Writer Name"
+writer_id: writer-slug
 ---
 ```
 
-The file body contains the writer's bio (HTML or Markdown) followed by a Liquid loop that lists all `_texts` items whose path contains the writer's slug:
+`writer_id` must match the matching folder names under `_texts/` and `_bibliography/`. For example, `writer_id: brand` pulls bibliography category links from `_texts/brand/`.
 
-```liquid
-{% for item in site.texts %}
-  {% if item.path contains '_texts/adisa/' %}
-    <li><a href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a></li>
-  {% endif %}
-{% endfor %}
+Optional infobox front matter:
+
+```yaml
+image: /assets/example-writer.jpg
+image_alt: "Writer Name"
+image_credit: "Photographer or publication"
+image_credit_url: "https://example.org/source"
+born: "1 January 1950"
+nationality: "Country or regional identity"
+forms:
+  - Poetry
+  - Fiction
+major_works:
+  - First Selected Work
+  - Second Selected Work
+themes:
+  - Migration
+  - Memory
 ```
+
+Only add fields that are verified. Empty or absent optional fields are omitted from the infobox automatically.
+
+The file body should contain the writer's narrative biography and any critical framing in Markdown. Do not add the "Works by Category" Liquid loop manually; `_layouts/writer.html` generates that section from `writer_id`.
 
 ### Bibliography pages (`_texts/<writer>/`)
 
@@ -162,7 +185,7 @@ bundle exec ruby zot-to-jekyll.rb
 
 ## Adding a new author
 
-Adding an author requires four things: a writer profile page, two bibliography listing pages, and two BibTeX source files. The steps below use `herrera` as an example slug — replace it with the new author's lowercase last name.
+Adding an author requires four source pieces: a writer profile page, two bibliography listing pages, and two BibTeX source files. Add a portrait image when a verified image and credit are available. The steps below use `herrera` as an example slug — replace it with the new author's lowercase last name.
 
 ### 1. Create the BibTeX source files
 
@@ -225,38 +248,53 @@ editor: Warren Harding
 _writers/herrera.md
 ```
 
-```html
+```markdown
 ---
-layout: page
+layout: writer
 title: "Georgina Herrera"
+writer_id: herrera
+image: /assets/georgina-herrera.jpg
+image_alt: "Georgina Herrera"
+image_credit: "Source name"
+image_credit_url: "https://example.org/source"
+born: "1936"
+nationality: "Cuban"
+forms:
+  - Poetry
+major_works:
+  - Gatos y liebres, o, Book of Heroes
+themes:
+  - Memory
+  - Black Cuban writing
 ---
 
-<hr>
-<p>Georgina Herrera (born 1936) is a Cuban poet...</p>
+Georgina Herrera (born 1936) is a Cuban poet...
 
-<hr>
-<h2>Works by Category</h2>
-<ul class="texts">
-{% for item in site.texts %}
-  {% if item.path contains '_texts/herrera/' %}
-  <li class="text-title">
-    <a href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a>
-  </li>
-  {% endif %}
-{% endfor %}
-</ul>
-<hr>
+## Literary Significance
+
+Add a short critical overview of the writer's themes, forms, and relevance to the project.
 ```
 
-The Liquid loop at the bottom auto-links to any `_texts/herrera/` pages, so no manual list maintenance is needed as categories are added.
+The `writer` layout auto-links to any `_texts/herrera/` pages, so no manual list maintenance is needed as categories are added. If the portrait image or a fact such as birth date, nationality, or major works is not verified, omit that field until it is confirmed.
 
-### 4. Verify locally
+### 4. Add the portrait image, if available
+
+Put writer portraits in `assets/` and reference them with a root-relative path in the writer front matter:
+
+```yaml
+image: /assets/georgina-herrera.jpg
+```
+
+Use descriptive `image_alt` text. Use `https://` for image-credit URLs when the source supports it.
+
+### 5. Verify locally
 
 ```bash
+bundle exec jekyll build
 bundle exec jekyll serve
 ```
 
-Navigate to the writer's profile page and confirm the bibliography links render. If a BibTeX file is empty or missing, Jekyll Scholar will output a blank page without erroring — double-check the `--file` path matches the actual filename.
+Navigate to the writer's profile page at `http://127.0.0.1:4000/warren-jekyll-site/writers/herrera/` and confirm the bibliography links render. If a BibTeX file is empty or missing, Jekyll Scholar will output a blank page without erroring — double-check the `--file` path matches the actual filename.
 
 ### File checklist
 
@@ -266,6 +304,7 @@ _bibliography/herrera/articles.bib   ← BibTeX source
 _texts/herrera/books.md              ← bibliography listing page
 _texts/herrera/articles.md           ← bibliography listing page
 _writers/herrera.md                  ← writer profile page
+assets/georgina-herrera.jpg          ← optional portrait image
 ```
 
 ## Build & deployment
@@ -285,7 +324,7 @@ This approach is required because `jekyll-scholar` is not on the GitHub Pages ge
 There is no `_data/` directory. All structured data lives in BibTeX files under `_bibliography/`.
 
 Static assets:
-- Writer portrait images are stored in `assets/` (`.jpg`, `.jpeg`)
+- Writer portrait images are stored in `assets/` (`.jpg`, `.jpeg`) and referenced from writer page front matter
 - `assets/banner_digital-scholarship.png` — institutional banner (currently commented out in sidebar)
 - `assets/open-graph-logo.png` — Open Graph / social sharing image
 - No external CDN dependencies except a jQuery 1.11.3 script tag in `search.html`

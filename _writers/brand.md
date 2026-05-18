@@ -1,29 +1,35 @@
 ---
-layout: page
+layout: writer
 title: "Dionne Brand"
-# writer: brand
+writer_id: brand
+image: /assets/Dionne-Brand_featured-image.jpg
+image_alt: "Dionne Brand"
+image_credit: "Clea Christakos-Gee. Bomb Magazine"
+image_credit_url: "https://bombmagazine.org/articles/2024/09/16/dionne-brand-by-saidiya-hartman/"
+born: "7 January 1953"
+nationality: "Canadian"
+forms:
+  - Poetry
+  - Fiction
+  - Essays
+  - Documentary film
+major_works:
+  - No Language Is Neutral
+  - Bread Out of Stone
+  - In Another Place, Not Here
+  - At the Full and Change of the Moon
+  - A Map to the Door of No Return
+themes:
+  - Black diaspora
+  - Migration
+  - Memory
+  - Belonging
 ---
-<hr>
-<div class="image">
-<img src="{{ site.baseurl }}/assets/Dionne-Brand_featured-image.jpg" alt="A picture of Dionne Brand." width="40%">
-<span class="caption">Credit: <a href="http://bombmagazine.org/articles/2024/09/16/dionne-brand-by-saidiya-hartman/">Clea Christakos-Gee. Bomb Magazine</a></span>
-</div>
-<p>Dionne Brand CM FRSC (born 7 January 1953) is a Canadian poet, novelist, essayist and documentarian. </p>
-<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam, similique veniam quae incidunt tempore nemo, iure necessitatibus perferendis officiis quod aliquam earum possimus dolorem, neque officia repellat doloremque iusto corrupti ad nostrum maxime recusandae nisi magni. Dolor aspernatur, eveniet dolorem fugit alias nihil voluptas, maxime vero minima excepturi quasi ex!</p>
-<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque minus expedita perspiciatis quos. Pariatur delectus impedit labore facilis quidem minima eos recusandae veritatis suscipit amet! Nisi cupiditate, doloribus veniam beatae impedit asperiores fuga ducimus deleniti, facere accusamus optio natus iusto a debitis sunt eum ratione dolore est quasi soluta laudantium?</p>
 
-<hr>
-<h2>Works by Category</h2>
-<ul class="texts">
-{% for item in site.texts %}
-    {% if item.path contains '_texts/brand/' %}
-  <li class="text-title">
-    <a href="{{ site.baseurl }}{{ item.url }}">
-      {{ item.title }}
-    </a>
-  </li>
-  {% endif %}
-{% endfor %}
-</ul>
+Dionne Brand CM FRSC (born 7 January 1953) is a Canadian poet, novelist, essayist, and documentarian. Her work moves across poetry, fiction, essays, and film while returning to questions of Black diasporic life, memory, migration, gender, and belonging.
 
-<hr>
+Brand's bibliography on this site focuses on creative works from the 1989-2001 period and criticism related to her writing. The selected works listed here include poetry, fiction, and essays represented in the local BibTeX files for the project.
+
+## Literary Significance
+
+Brand's writing is central to contemporary Caribbean diasporic and Black Canadian literature. Her books from this period move between lyric, narrative, documentary, and critical forms, making her writer page a useful prototype for profiles that need to connect biography, major works, and bibliography.
