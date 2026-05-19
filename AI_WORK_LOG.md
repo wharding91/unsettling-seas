@@ -3,6 +3,40 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-05-19 — Session 9 (Claude Code / claude-sonnet-4-6)
+
+**Focus:** Replaced low-resolution Morejón portrait with high-resolution Bomb Magazine photo.
+
+### Files changed
+
+| File | Action | Commit |
+|---|---|---|
+| `assets/morejon-bomb-photo-by-adolpho-ayuso.jpg` | Added — 210KB, 1400×1742px, photo by Adolpho Ayuso (Bomb Magazine) | `3a47199` |
+| `_writers/morejon.md` | Updated front matter: image path, image_credit, image_credit_url | `3a47199` |
+
+### Commands run
+
+```bash
+git add assets/morejon-bomb-photo-by-adolpho-ayuso.jpg _writers/morejon.md
+git commit -m "fix(morejon): replace low-res Wikimedia portrait with Bomb Magazine photo"
+git push origin main   # → triggered Actions run 26112320164
+```
+
+### Validations
+
+- GitHub Actions deploy: **in_progress** at handoff (run 26112320164 confirmed triggered)
+- Jekyll build (local): not run
+- htmlproofer: not run
+
+### Outcome
+
+Low-resolution Morejón portrait blocker resolved. The old `morejon.jpg` (6.3KB Wikimedia thumbnail) is still present in `assets/` but is no longer referenced by any page. The new file is 33× larger and at a publication-quality resolution. One commit pushed; deploy triggered automatically via Actions.
+
+### Next step
+
+Remove the now-unreferenced low-res original: `git rm assets/morejon.jpg && git commit -m "chore(assets): remove superseded low-res Morejón portrait" && git push origin main`
+
+---
 ## 2026-05-19 — Session 8 extended (Claude Code / claude-sonnet-4-6)
 
 **Focus:** Renamed `migrating.md` to `TRANSFER.md` and rewrote it with repo-rename guidance, an Actions permissions step, and `<repo-name>` placeholders. Updated all cross-references across the repo.

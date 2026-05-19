@@ -1,16 +1,16 @@
 {
   "last_updated": "2026-05-19",
-  "last_session": "session 8 (extended) — Claude Code",
+  "last_session": "session 9 — Claude Code",
   "branch": "main",
-  "git_sha": "36ff6a3",
-  "worktree_state": "clean — 2 permanent untracked tooling dirs (.claude/, .omx/); 1 untracked asset (assets/morejon-bomb-photo-by-adolpho-ayuso.jpg — Morejón portrait candidate, Bomb Magazine, photo by Adolpho Ayuso; not yet committed)",
+  "git_sha": "3a47199",
+  "worktree_state": "clean — 2 permanent untracked tooling dirs (.claude/, .omx/) only",
   "local_directory": "/Users/codycarvel/Documents/GitHub/warren-jekyll-site",
-  "current_focus": "Renamed migrating.md to TRANSFER.md; rewrote with repo-rename guidance, Actions permissions step, and <repo-name> placeholders throughout.",
-  "exact_next_step": "Commit the Morejón portrait: verify assets/morejon-bomb-photo-by-adolpho-ayuso.jpg is the intended replacement, update _writers/morejon.md front matter (image: /assets/morejon-bomb-photo-by-adolpho-ayuso.jpg, image_alt: 'Nancy Morejón', image_credit: 'Adolpho Ayuso. Bomb Magazine', image_credit_url: 'https://bombmagazine.org'), then run: git add assets/morejon-bomb-photo-by-adolpho-ayuso.jpg _writers/morejon.md && git commit -m 'fix(morejon): replace low-res portrait with Bomb Magazine photo' && git push origin main",
+  "current_focus": "Replaced low-res Morejón portrait (6KB Wikimedia thumbnail) with high-resolution Bomb Magazine photo by Adolpho Ayuso (210KB, 1400×1742px). Updated _writers/morejon.md front matter.",
+  "exact_next_step": "Remove the now-unreferenced low-res original: git rm assets/morejon.jpg && git commit -m 'chore(assets): remove superseded low-res Morejón portrait' && git push origin main. Then fix the About paragraph in index.html which still reads 'five additional writers currently in development'.",
   "blockers": [
     {
       "id": "repo-transfer-pending",
-      "description": "Repo is still under ccarvel's account. Warren's GitHub username and preferred final repo name (e.g. unsettling-seas) needed before initiating transfer. See TRANSFER.md — now includes repo-rename file checklist, Actions permissions step, and <repo-name> placeholders throughout.",
+      "description": "Repo is still under ccarvel's account. Warren's GitHub username and preferred final repo name (e.g. unsettling-seas) needed before initiating transfer. See TRANSFER.md for full checklist including Actions permissions step and repo-rename file table.",
       "severity": "medium",
       "owner": "Cody + Warren Harding"
     },
@@ -19,16 +19,10 @@
       "description": "peaceiris/actions-gh-pages@v3 in .github/workflows/deploy.yml runs on Node.js 20. GitHub forces upgrade Jun 2 2026; removes Node 20 Sep 16 2026. Fix: swap to JamesIves/github-pages-deploy-action@v4 with single-commit: true. Full before/after diff in README.md Build & deployment section.",
       "severity": "low",
       "owner": "Cody"
-    },
-    {
-      "id": "morejon-portrait-low-res",
-      "description": "assets/morejon.jpg is 6KB / very low resolution. Replacement candidate assets/morejon-bomb-photo-by-adolpho-ayuso.jpg is now sitting untracked in assets/ — awaiting commit.",
-      "severity": "low",
-      "owner": "Cody"
     }
   ],
   "open_tasks": [
-    "Commit Morejón portrait replacement: assets/morejon-bomb-photo-by-adolpho-ayuso.jpg — update _writers/morejon.md front matter and push",
+    "Remove superseded low-res portrait: git rm assets/morejon.jpg",
     "Update About paragraph in index.html (still reads 'five additional writers currently in development')",
     "Transfer repo to Warren's GitHub account — confirm final repo name first; see TRANSFER.md",
     "Update url: and baseurl: in _config.yml after transfer (and rename if applicable)",
@@ -40,10 +34,9 @@
     "Add content license statement"
   ],
   "completed_this_session": [
-    "Renamed migrating.md → TRANSFER.md via git mv",
-    "Updated _config.yml exclude list: migrating.md → TRANSFER.md",
-    "Updated README.md (repo tree + Project documentation table), MAINTENANCE.md, TODO.md, ai_status.json to reference TRANSFER.md",
-    "Rewrote TRANSFER.md: added Step 0 (decide repo name, options table with live URLs), repo-rename file checklist (3 tiers: critical/docs/auto-Liquid), new Step 4 (enable GitHub Actions + set workflow permissions on Warren's account), clarified Step 5 Pages source, replaced all hardcoded warren-jekyll-site with <repo-name> placeholder, expanded summary table"
+    "Committed assets/morejon-bomb-photo-by-adolpho-ayuso.jpg (210KB, 1400×1742px) — replaces 6.3KB Wikimedia thumbnail",
+    "Updated _writers/morejon.md: image path, image_credit (Adolpho Ayuso. Bomb Magazine), image_credit_url (https://bombmagazine.org)",
+    "Pushed 3a47199 to main; GitHub Actions deploy triggered and confirmed in_progress"
   ],
   "relay_version": "0.1.0",
   "todo_file": "TODO.md",
