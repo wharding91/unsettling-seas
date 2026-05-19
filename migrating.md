@@ -113,17 +113,18 @@ git remote -v   # confirm
 
 ---
 
-## Step 7 — Commit the config change and deploy
+## Step 7 — Commit the config change and push
 
 ```bash
 git add _config.yml
 git commit -m "fix(config): update url and baseurl for repo transfer to <warren-username>"
 git push origin main
-bundle exec rake ed:publish
 ```
 
-The `ed:publish` command builds the site locally and force-pushes the built
-output to the `gh-pages` branch. After the GitHub Pages action goes green
+Pushing to `main` automatically triggers the GitHub Actions deploy workflow
+(`.github/workflows/deploy.yml`), which builds the site and pushes the output
+to `gh-pages`. You do not need to run `bundle exec rake ed:publish` manually.
+After the Actions run goes green
 (visible at `github.com/<warren-username>/warren-jekyll-site/actions`), the
 site will be live at:
 

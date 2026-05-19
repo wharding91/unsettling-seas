@@ -6,7 +6,7 @@ Bibliographic resources for Caribbean women's and feminist creative writing, 198
 
 ## About the project
 
-*Unsettling Seas* is a bibliographic-generated digital humanities project that documents the creative and critical output of Caribbean women writers across the period 1989-2001. Employing the principles of minimal computing, the site currently catalogs the works of Opal Palmer Adisa, Dionne Brand, and five additional writers currently in development (Georgina Herrera, Nancy Morejón, M. NourbeSe Philip, Soleida Ríos, and Évelyne Trouillot) and will expand to at least one-hundred (100) writers. Each writer receives a profile page and per-category bibliography pages rendered from BibTeX source files via Jekyll Scholar that center the writers’ works. This digital humanities project seeks to extend a digital forum for the public, librarians, creative writers, scholars, archivists, students, and technologists to study how creative and critical writing were central in gender justice movements across Caribbean spaces (regionally and diasporically). The project is currently being edited by Warren Harding.
+*Unsettling Seas* is a bibliographic digital humanities project that documents the creative and critical output of Caribbean women writers across the period 1989–2001. Employing the principles of minimal computing, the site currently catalogs the works of seven writers — Opal Palmer Adisa, Dionne Brand, Georgina Herrera, Nancy Morejón, M. NourbeSe Philip, Soleida Ríos, and Évelyne Trouillot — and will expand to at least one hundred (100) writers. Each writer receives a profile page and per-category bibliography pages rendered from BibTeX source files via Jekyll Scholar that center the writers' works. This digital humanities project seeks to extend a digital forum for the public, librarians, creative writers, scholars, archivists, students, and technologists to study how creative and critical writing were central in gender justice movements across Caribbean spaces (regionally and diasporically). The project is currently edited by Warren Harding.
 
 ## Tech stack
 
@@ -21,22 +21,26 @@ Bibliographic resources for Caribbean women's and feminist creative writing, 198
 | Markdown | kramdown + kramdown-parser-gfm |
 | Search | elasticlunr.js (client-side, no server required) |
 
-Not on the GitHub Pages allowlist: `jekyll-scholar` requires local build or a custom deploy step (see [Build & deployment](#build--deployment)).
+`jekyll-scholar` is not on the GitHub Pages gem allowlist. Deployment uses a GitHub Actions workflow that builds the site on GitHub's runners and pushes the compiled output to `gh-pages` (see [Build & deployment](#build--deployment)).
 
 ## Repository structure
 
 ```
 .
+├── .github/
+│   └── workflows/
+│       └── deploy.yml      # Automated build + gh-pages deploy on push to main
 ├── _bibliography/          # BibTeX source files for Jekyll Scholar
-│   ├── adisa/              #   Per-writer bib files (books.bib, articles.bib)
+│   ├── adisa/              #   Per-writer subdirs (books.bib, articles.bib)
 │   ├── brand/
-│   ├── articles.bib        #   Legacy combined bibliography files
-│   ├── books.bib
-│   ├── chapters.bib
-│   └── lectures.bib
+│   ├── herrera/
+│   ├── morejon/
+│   ├── philip/
+│   ├── rios/
+│   └── trouillot/
 ├── _includes/
-│   ├── head.html           # <head>: Dublin Core, Open Graph, CSS/RSS links
-│   ├── sidebar.html        # Toggleable nav sidebar
+│   ├── head.html           # <head>: Dublin Core, Open Graph, favicon links, CSS/RSS
+│   ├── sidebar.html        # Toggleable nav sidebar (auto-sorted by sort_name)
 │   └── writer-infobox.html # Writer profile infobox, driven by front matter
 ├── _layouts/
 │   ├── default.html        # Base layout: sidebar + masthead + content
@@ -52,23 +56,46 @@ Not on the GitHub Pages allowlist: `jekyll-scholar` requires local build or a cu
 │   └── _syntax.scss        # Code/pre syntax highlighting
 ├── _texts/                 # Jekyll collection: bibliography listing pages
 │   ├── adisa/              #   books.md, articles.md (render per-writer bib)
-│   └── brand/
+│   ├── brand/
+│   ├── herrera/
+│   ├── morejon/
+│   ├── philip/
+│   ├── rios/
+│   └── trouillot/
 ├── _writers/               # Jekyll collection: writer profile pages
 │   ├── adisa.md
-│   └── brand.md
+│   ├── brand.md
+│   ├── herrera.md
+│   ├── morejon.md
+│   ├── philip.md
+│   ├── rios.md
+│   └── trouillot.md
 ├── assets/
 │   ├── css/style.scss      # Main stylesheet entry point
-│   └── js/                 # elasticlunr.min.js, search.js
+│   ├── js/                 # elasticlunr.min.js, search.js
+│   ├── favicon.ico         # Multi-size favicon (16×16, 32×32)
+│   ├── favicon-16x16.png
+│   ├── favicon-32x32.png
+│   ├── favicon-48x48.png
+│   ├── favicon-512.png
+│   ├── apple-touch-icon.png          # 180×180 iOS home screen icon
+│   ├── android-chrome-192x192.png    # PWA manifest icons
+│   ├── android-chrome-512x512.png
+│   └── [writer portrait .jpg/.jpeg files]
 ├── _config.yml             # Site configuration
 ├── ed..gemspec             # Local theme gem specification
 ├── Gemfile / Gemfile.lock  # Ruby dependency manifest
-├── Rakefile                # `rake ed:publish` — build and push to gh-pages
+├── Rakefile                # `rake ed:publish` — manual build-and-push fallback
+├── site.webmanifest        # PWA web manifest (Liquid-templated for baseurl)
 ├── index.html              # Homepage: writer list + About section
 ├── search.html             # Client-side search page
 ├── atom.xml                # RSS feed
 ├── zot-to-jekyll.rb        # Utility: normalizes Zotero-exported BibTeX keys/PDFs
 ├── scripts/
 │   └── update_relay_state.py  # CLI helper for AI agent handoff state
+├── MAINTENANCE.md          # Non-technical content-update guide (5 sections)
+├── APPS_AND_WORKFLOWS.md   # macOS app setup guide for non-technical editors
+├── migrating.md            # Step-by-step repo transfer guide (ccarvel → Warren)
 ├── AI_CONTEXT.md           # AI agent context (repo overview, commands, conventions)
 ├── AI_WORK_LOG.md          # Append-only AI session log
 ├── ai_status.json          # Machine-readable current focus and next step
@@ -85,8 +112,8 @@ Not on the GitHub Pages allowlist: `jekyll-scholar` requires local build or a cu
 ### Setup
 
 ```bash
-git clone https://github.com/ccarvel/jekyll-site-theme.git
-cd jekyll-site-theme
+git clone https://github.com/ccarvel/warren-jekyll-site.git
+cd warren-jekyll-site
 bundle install
 ```
 
@@ -124,7 +151,7 @@ sort_name: "Last, First Middle"
 ---
 ```
 
-`writer_id` must match the matching folder names under `_texts/` and `_bibliography/`. For example, `writer_id: brand` pulls bibliography category links from `_texts/brand/` into the profile infobox. `sort_name` controls writer ordering in the sidebar, so use last-name-first format.
+`writer_id` must match the folder names under `_texts/` and `_bibliography/`. For example, `writer_id: brand` pulls bibliography category links from `_texts/brand/` into the profile infobox. `sort_name` controls writer ordering in the sidebar — use last-name-first format.
 
 Optional infobox front matter:
 
@@ -152,7 +179,7 @@ The file body should contain the writer's narrative biography and any critical f
 
 ### Bibliography pages (`_texts/<writer>/`)
 
-Each page renders one BibTeX file through Jekyll Scholar. Front-matter:
+Each page renders one BibTeX file through Jekyll Scholar. Front matter:
 
 ```yaml
 ---
@@ -186,7 +213,7 @@ bundle exec ruby zot-to-jekyll.rb
 
 ## Adding a new author
 
-Adding an author requires four source pieces: a writer profile page, two bibliography listing pages, and two BibTeX source files. Add a portrait image when a verified image and credit are available. The steps below use `herrera` as an example slug — replace it with the new author's lowercase last name.
+Adding an author requires four source pieces: a writer profile page, two bibliography listing pages, and two BibTeX source files. Add a portrait image when a verified image and credit are available. The steps below use `herrera` as an example slug — replace it with the new author's lowercase last name (no spaces, no accent marks).
 
 ### 1. Create the BibTeX source files
 
@@ -255,11 +282,11 @@ layout: writer
 title: "Georgina Herrera"
 writer_id: herrera
 sort_name: "Herrera, Georgina"
-image: /assets/georgina-herrera.jpg
+image: /assets/herrera.jpg
 image_alt: "Georgina Herrera"
 image_credit: "Source name"
 image_credit_url: "https://example.org/source"
-born: "1936"
+born: "23 April 1936"
 nationality: "Cuban"
 forms:
   - Poetry
@@ -277,14 +304,14 @@ Georgina Herrera (born 1936) is a Cuban poet...
 Add a short critical overview of the writer's themes, forms, and relevance to the project.
 ```
 
-The `writer` layout auto-links to any `_texts/herrera/` pages in the profile infobox, so no manual list maintenance is needed as categories are added. If the portrait image or a fact such as birth date, nationality, or major works is not verified, omit that field until it is confirmed.
+The `writer` layout auto-links to any `_texts/herrera/` pages in the profile infobox — no manual list maintenance is needed as categories are added. If the portrait image or any fact (birth date, nationality, major works) is not verified, omit that field until it is confirmed.
 
 ### 4. Add the portrait image, if available
 
 Put writer portraits in `assets/` and reference them with a root-relative path in the writer front matter:
 
 ```yaml
-image: /assets/georgina-herrera.jpg
+image: /assets/herrera.jpg
 ```
 
 Use descriptive `image_alt` text. Use `https://` for image-credit URLs when the source supports it.
@@ -296,7 +323,7 @@ bundle exec jekyll build
 bundle exec jekyll serve
 ```
 
-Navigate to the writer's profile page at `http://127.0.0.1:4000/warren-jekyll-site/writers/herrera/` and confirm the bibliography links render. If a BibTeX file is empty or missing, Jekyll Scholar will output a blank page without erroring — double-check the `--file` path matches the actual filename.
+Navigate to `http://127.0.0.1:4000/warren-jekyll-site/writers/herrera/` and confirm the bibliography links render. If a BibTeX file is empty or missing, Jekyll Scholar outputs a blank page without erroring — double-check the `--file` path matches the actual filename.
 
 ### File checklist
 
@@ -306,29 +333,85 @@ _bibliography/herrera/articles.bib   ← BibTeX source
 _texts/herrera/books.md              ← bibliography listing page
 _texts/herrera/articles.md           ← bibliography listing page
 _writers/herrera.md                  ← writer profile page
-assets/georgina-herrera.jpg          ← optional portrait image
+assets/herrera.jpg                   ← optional portrait image
 ```
 
 ## Build & deployment
 
-There is no GitHub Actions workflow. Deployment uses a Rake task that builds the site locally and force-pushes the compiled `_site/` directory to the `gh-pages` branch on `origin`:
+### Automated deployment (primary)
+
+Deployment is handled automatically by the GitHub Actions workflow at `.github/workflows/deploy.yml`. Every push to `main` triggers the following steps on GitHub's runners:
+
+1. Check out source
+2. Set up Ruby 3.4 with bundler gem cache
+3. `bundle exec jekyll build` (with `JEKYLL_ENV=production`)
+4. Add `.nojekyll` to prevent GitHub Pages from re-processing the pre-built output
+5. Force-push `_site/` to the `gh-pages` branch via `peaceiris/actions-gh-pages@v3`
+
+You do not need to run any local build commands after pushing. The Actions tab at `https://github.com/ccarvel/warren-jekyll-site/actions` shows a green checkmark when the deploy has completed (typically within 1–2 minutes of pushing).
+
+This approach is required because `jekyll-scholar` is not on the GitHub Pages gem allowlist and cannot be built by GitHub's standard Pages pipeline.
+
+### Manual fallback
+
+The original Rake task remains available if the Actions workflow is unavailable or you need to force a local build:
 
 ```bash
 bundle exec rake ed:publish
 ```
 
-Pushing to `main` updates the source code but does not update the live GitHub Pages site. After committing and pushing source changes, run `bundle exec rake ed:publish` to update `gh-pages`; GitHub's built-in Pages deployment then serves that prebuilt branch.
+This builds the site locally and force-pushes `_site/` to `gh-pages`. It is no longer needed for routine updates.
 
-This approach is required because `jekyll-scholar` is not on the GitHub Pages gem allowlist and cannot be used with the standard GH Pages build.
+### Node.js deprecation in the deploy workflow
 
-**Note:** `.travis.yml` is present in the repo but targets Ruby 2.2.2 and does not match the current Gemfile. It is not active.
+The `peaceiris/actions-gh-pages@v3` action currently used in `.github/workflows/deploy.yml` runs on Node.js 20. GitHub is retiring Node.js 20 from Actions runners on a fixed schedule:
+
+| Date | Event |
+|---|---|
+| **June 2, 2026** | Node.js 24 becomes the default; deprecation warnings turn into forced upgrades |
+| **September 16, 2026** | Node.js 20 removed from runners; the action will stop working |
+
+**How to fix it before the deadline.** Open `.github/workflows/deploy.yml` and swap the last deploy step:
+
+```yaml
+# Remove this block:
+- name: Deploy to gh-pages branch
+  uses: peaceiris/actions-gh-pages@v3
+  with:
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+    publish_dir: ./_site
+    force_orphan: true
+
+# Replace with this block:
+- name: Deploy to gh-pages branch
+  uses: JamesIves/github-pages-deploy-action@v4
+  with:
+    folder: _site
+    branch: gh-pages
+    single-commit: true
+```
+
+`JamesIves/github-pages-deploy-action` is actively maintained and Node.js 24-compatible. `single-commit: true` preserves the clean single-commit `gh-pages` history that `force_orphan: true` produced. No other workflow changes are needed — commit and push; the new action will be used on the next run.
+
+## Project documentation
+
+Three non-technical guides live at the repo root and are excluded from the Jekyll build:
+
+| File | Audience | Contents |
+|---|---|---|
+| [`MAINTENANCE.md`](MAINTENANCE.md) | Non-technical content editors | Directory map (safe vs. system files), step-by-step bio editing via GitHub web UI, adding an 8th writer, Zotero export guide, local preview setup, troubleshooting |
+| [`APPS_AND_WORKFLOWS.md`](APPS_AND_WORKFLOWS.md) | Non-technical macOS users taking over the site | Three setup pathways (MacDown/GitHub Desktop → VS Code/GitHub Desktop → VS Code only), VS Code extension checklist, click-by-click task workflows, macOS Smart Quotes and hidden-extension warnings |
+| [`migrating.md`](migrating.md) | Cody + Warren | 8-step checklist for transferring the repository from `ccarvel` to Warren's GitHub account, re-enabling Pages, updating `_config.yml`, and verifying the live site |
 
 ## Data & assets
 
 There is no `_data/` directory. All structured data lives in BibTeX files under `_bibliography/`.
 
 Static assets:
+
 - Writer portrait images are stored in `assets/` (`.jpg`, `.jpeg`) and referenced from writer page front matter
+- `assets/favicon.ico` and companion PNG sizes — full favicon set for all browsers and platforms
+- `site.webmanifest` — PWA web manifest; Liquid-templated so `baseurl` paths update automatically on repo transfer
 - `assets/banner_digital-scholarship.png` — institutional banner (currently commented out in sidebar)
 - `assets/open-graph-logo.png` — Open Graph / social sharing image
 - No external CDN dependencies except a jQuery 1.11.3 script tag in `search.html`
@@ -369,7 +452,7 @@ At the end of any AI session, run `--status --log --summary "..." --next-step ".
 
 ## Contributing
 
-Open an issue or pull request on [GitHub](https://github.com/ccarvel/jekyll-site-theme). For bibliography additions, follow the BibTeX key convention and per-writer file structure described above.
+Open an issue or pull request on [GitHub](https://github.com/ccarvel/warren-jekyll-site). For bibliography additions, follow the BibTeX key convention and per-writer file structure described above.
 
 ## License
 
