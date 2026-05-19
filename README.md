@@ -120,10 +120,10 @@ bundle install
 ### Serve locally
 
 ```bash
-bundle exec jekyll serve
+bundle exec jekyll serve --baseurl ""
 ```
 
-The site is available at `http://127.0.0.1:4000/warren-jekyll-site/`.
+The site is available at `http://127.0.0.1:4000/`. The `--baseurl ""` flag overrides the `/warren-jekyll-site` prefix used on the live site — without it, WEBrick 404s on the root URL instead of serving the homepage.
 
 To validate links and markup after a build:
 
@@ -320,10 +320,10 @@ Use descriptive `image_alt` text. Use `https://` for image-credit URLs when the 
 
 ```bash
 bundle exec jekyll build
-bundle exec jekyll serve
+bundle exec jekyll serve --baseurl ""
 ```
 
-Navigate to `http://127.0.0.1:4000/warren-jekyll-site/writers/herrera/` and confirm the bibliography links render. If a BibTeX file is empty or missing, Jekyll Scholar outputs a blank page without erroring — double-check the `--file` path matches the actual filename.
+Navigate to `http://127.0.0.1:4000/writers/herrera/` and confirm the bibliography links render. If a BibTeX file is empty or missing, Jekyll Scholar outputs a blank page without erroring — double-check the `--file` path matches the actual filename.
 
 ### File checklist
 

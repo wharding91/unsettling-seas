@@ -238,7 +238,7 @@ If you want to preview changes on your own computer before they go live, you nee
   ```
 - [ ] Start the local preview server:
   ```bash
-  bundle exec jekyll serve
+  bundle exec jekyll serve --baseurl ""
   ```
 
 ### Success criteria
@@ -253,7 +253,7 @@ Copy that URL (`http://127.0.0.1:4000/`) and paste it into your web browser. The
 
 To stop the server, press **`Ctrl + C`** in the terminal.
 
-> **Note:** On this project, the local URL does not include the `/warren-jekyll-site/` path prefix that the live GitHub Pages site uses. This means navigation links will work, but the URL in your browser bar will look slightly different from the live site. This is normal and expected.
+> **Note:** The `--baseurl ""` flag overrides the `/warren-jekyll-site` path prefix used on the live GitHub Pages site. Without it, the local server redirects the root URL to `/warren-jekyll-site` and WEBrick returns a 404. With the flag, the site is available directly at `http://127.0.0.1:4000/` and all navigation works normally.
 
 ---
 
