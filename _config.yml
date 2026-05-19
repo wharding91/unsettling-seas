@@ -64,6 +64,8 @@ exclude:
   - "website proofing.docx"
   - zot-to-jekyll.rb
   - ed.gemspec
+  - MAINTENANCE.md
+  - APPS_AND_WORKFLOWS.md
 
 # Theme
 theme: "ed."

@@ -52,3 +52,4 @@ bower_components
 # Recommended in Ben Balter's Jekyll Style Guide
 .sass-cache
 .jekyll-metadata
+.gstack/

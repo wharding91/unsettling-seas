@@ -1,0 +1,48 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+# Grant the GITHUB_TOKEN permission to push to gh-pages
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      # ruby/setup-ruby reads the ruby version from Gemfile (~> 3.4.0)
+      # and restores the full gem bundle from cache automatically.
+      - name: Set up Ruby and cached gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      # jekyll-scholar depends only on pure-Ruby gems (bibtex-ruby, citeproc,
+      # latex-decode). No native system packages are required beyond the
+      # standard build-essential toolchain that ubuntu-latest already provides.
+      - name: Build site with Jekyll
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+
+      # Prevent GitHub Pages from re-processing the pre-built _site directory.
+      # This replicates the effect of the .nojekyll file used in the Rake deploy.
+      - name: Add .nojekyll marker
+        run: touch _site/.nojekyll
+
+      # Push _site/ to the gh-pages branch using a force-orphan strategy,
+      # which mirrors the behavior of `bundle exec rake ed:publish`.
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          force_orphan: true
