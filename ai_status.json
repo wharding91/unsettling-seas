@@ -1,60 +1,49 @@
 {
   "last_updated": "2026-05-19",
-  "last_session": "session 8 — Claude Code",
+  "last_session": "session 8 (extended) — Claude Code",
   "branch": "main",
-  "git_sha": "76e8d7a",
-  "worktree_state": "clean — 2 pre-existing untracked tooling dirs (.claude/, .omx/); 1 new untracked asset (assets/morejon_01_body.jpg — possible Morejón portrait replacement, not yet committed)",
+  "git_sha": "36ff6a3",
+  "worktree_state": "clean — 2 permanent untracked tooling dirs (.claude/, .omx/); 1 untracked asset (assets/morejon-bomb-photo-by-adolpho-ayuso.jpg — Morejón portrait candidate, Bomb Magazine, photo by Adolpho Ayuso; not yet committed)",
   "local_directory": "/Users/codycarvel/Documents/GitHub/warren-jekyll-site",
-  "current_focus": "Infrastructure and handoff documentation: GitHub Actions deploy workflow, MAINTENANCE.md, APPS_AND_WORKFLOWS.md, full favicon set, README overhaul, Rakefile fixes, legacy cleanup.",
-  "exact_next_step": "Review assets/morejon_01_body.jpg — if it is the replacement portrait for Nancy Morejón, update _writers/morejon.md front matter (image: /assets/morejon_01_body.jpg, image_alt, image_credit, image_credit_url), then commit and push: git add assets/morejon_01_body.jpg _writers/morejon.md && git commit -m 'fix(morejon): replace low-res portrait' && git push origin main. Then fix the About paragraph in index.html which still reads 'five additional writers currently in development'.",
+  "current_focus": "Renamed migrating.md to TRANSFER.md; rewrote with repo-rename guidance, Actions permissions step, and <repo-name> placeholders throughout.",
+  "exact_next_step": "Commit the Morejón portrait: verify assets/morejon-bomb-photo-by-adolpho-ayuso.jpg is the intended replacement, update _writers/morejon.md front matter (image: /assets/morejon-bomb-photo-by-adolpho-ayuso.jpg, image_alt: 'Nancy Morejón', image_credit: 'Adolpho Ayuso. Bomb Magazine', image_credit_url: 'https://bombmagazine.org'), then run: git add assets/morejon-bomb-photo-by-adolpho-ayuso.jpg _writers/morejon.md && git commit -m 'fix(morejon): replace low-res portrait with Bomb Magazine photo' && git push origin main",
   "blockers": [
     {
       "id": "repo-transfer-pending",
-      "description": "Repo is still under ccarvel's account. Warren's GitHub username and preferred repo name needed to initiate transfer. See TRANSFER.md for full checklist.",
+      "description": "Repo is still under ccarvel's account. Warren's GitHub username and preferred final repo name (e.g. unsettling-seas) needed before initiating transfer. See TRANSFER.md — now includes repo-rename file checklist, Actions permissions step, and <repo-name> placeholders throughout.",
       "severity": "medium",
       "owner": "Cody + Warren Harding"
     },
     {
       "id": "nodejs-deprecation",
-      "description": "peaceiris/actions-gh-pages@v3 in .github/workflows/deploy.yml runs on Node.js 20. GitHub retires Node 20 on Sep 16 2026 (forced upgrade Jun 2 2026). Fix: swap to JamesIves/github-pages-deploy-action@v4 with single-commit: true. Full before/after diff documented in README.md Build & deployment section.",
+      "description": "peaceiris/actions-gh-pages@v3 in .github/workflows/deploy.yml runs on Node.js 20. GitHub forces upgrade Jun 2 2026; removes Node 20 Sep 16 2026. Fix: swap to JamesIves/github-pages-deploy-action@v4 with single-commit: true. Full before/after diff in README.md Build & deployment section.",
       "severity": "low",
       "owner": "Cody"
     },
     {
       "id": "morejon-portrait-low-res",
-      "description": "assets/morejon.jpg is 6KB / very low resolution. assets/morejon_01_body.jpg appeared in assets/ as untracked this session — may be the replacement candidate. Verify and commit if correct.",
+      "description": "assets/morejon.jpg is 6KB / very low resolution. Replacement candidate assets/morejon-bomb-photo-by-adolpho-ayuso.jpg is now sitting untracked in assets/ — awaiting commit.",
       "severity": "low",
       "owner": "Cody"
     }
   ],
   "open_tasks": [
-    "Review and commit assets/morejon_01_body.jpg if it is the Morejón portrait replacement; update _writers/morejon.md front matter",
-    "Update About paragraph in index.html (still says 'five additional writers currently in development')",
-    "Transfer repo to Warren's GitHub account (see TRANSFER.md); confirm final repo name with Warren first",
-    "Update url: and baseurl: in _config.yml after transfer",
-    "Fix Node.js deprecation: swap peaceiris/actions-gh-pages@v3 → JamesIves/github-pages-deploy-action@v4 (deadline Jun 2 2026; full diff in README)",
+    "Commit Morejón portrait replacement: assets/morejon-bomb-photo-by-adolpho-ayuso.jpg — update _writers/morejon.md front matter and push",
+    "Update About paragraph in index.html (still reads 'five additional writers currently in development')",
+    "Transfer repo to Warren's GitHub account — confirm final repo name first; see TRANSFER.md",
+    "Update url: and baseurl: in _config.yml after transfer (and rename if applicable)",
+    "Update README.md, MAINTENANCE.md, APPS_AND_WORKFLOWS.md if repo is renamed (see TRANSFER.md Step 0 file table)",
+    "Fix Node.js deprecation: swap peaceiris/actions-gh-pages@v3 → JamesIves/github-pages-deploy-action@v4 (deadline Jun 2 2026; diff in README)",
     "Fix missing references.bib in _bibliography/",
     "Update jQuery 1.11.3 in search.html",
     "Fix fb:admins upstream metadata in _includes/head.html",
     "Add content license statement"
   ],
   "completed_this_session": [
-    "Created .github/workflows/deploy.yml — GitHub Actions workflow; automated build + gh-pages deploy on every push to main",
-    "Tested Actions workflow — 4 successful runs confirmed (14–39s each); live site smoke-tested 200 on homepage, adisa, trouillot",
-    "Created MAINTENANCE.md — 5-section non-technical content-update guide",
-    "Created APPS_AND_WORKFLOWS.md — 4-section macOS app setup guide for non-technical editors",
-    "Added MAINTENANCE.md and APPS_AND_WORKFLOWS.md to _config.yml exclude list",
-    "Added .gstack/ to .gitignore",
-    "Removed 4 legacy Pollock .bib files from _bibliography/ root (articles.bib, books.bib, chapters.bib, lectures.bib)",
-    "Added full favicon set to assets/: favicon.ico, favicon-16x16.png, favicon-32x32.png, favicon-48x48.png, favicon-512.png, apple-touch-icon.png, android-chrome-192x192.png, android-chrome-512x512.png",
-    "Created site.webmanifest at repo root as Liquid template (baseurl auto-updates on repo transfer)",
-    "Updated _includes/head.html Icons block: replaced single shortcut icon link with full 5-tag favicon set",
-    "Removed assets/pollock.jpg (upstream Pollock artifact, unreferenced)",
-    "Removed unsettling-seas-favicon-4/ source directory (user action, confirmed gone)",
-    "Overhauled README.md: fixed About paragraph, updated repo tree (7 writers, no legacy bibs, new files), fixed clone URL, full Build & deployment rewrite, Node.js deprecation section, Project documentation section, fixed Contributing URL, removed stale Travis CI note",
-    "Updated migrating.md Step 7: replaced rake ed:publish with push-to-main/Actions instructions",
-    "Fixed Rakefile: added ENV[JEKYLL_ENV]=production and File.write(_site/.nojekyll) — Rake fallback now matches Actions output exactly",
-    "Expanded README Build & deployment: annotated step table + full YAML block for Actions; 6-step breakdown for Rake fallback; cross-references and race-condition warning"
+    "Renamed migrating.md → TRANSFER.md via git mv",
+    "Updated _config.yml exclude list: migrating.md → TRANSFER.md",
+    "Updated README.md (repo tree + Project documentation table), MAINTENANCE.md, TODO.md, ai_status.json to reference TRANSFER.md",
+    "Rewrote TRANSFER.md: added Step 0 (decide repo name, options table with live URLs), repo-rename file checklist (3 tiers: critical/docs/auto-Liquid), new Step 4 (enable GitHub Actions + set workflow permissions on Warren's account), clarified Step 5 Pages source, replaced all hardcoded warren-jekyll-site with <repo-name> placeholder, expanded summary table"
   ],
   "relay_version": "0.1.0",
   "todo_file": "TODO.md",

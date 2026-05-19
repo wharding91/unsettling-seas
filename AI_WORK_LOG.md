@@ -3,6 +3,45 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-05-19 — Session 8 extended (Claude Code / claude-sonnet-4-6)
+
+**Focus:** Renamed `migrating.md` to `TRANSFER.md` and rewrote it with repo-rename guidance, an Actions permissions step, and `<repo-name>` placeholders. Updated all cross-references across the repo.
+
+### Files changed
+
+| File | Action | Commit |
+|---|---|---|
+| `migrating.md` → `TRANSFER.md` | Renamed via git mv; fully rewritten | `36ff6a3` |
+| `_config.yml` | exclude: migrating.md → TRANSFER.md | `36ff6a3` |
+| `README.md` | Repo tree + Project docs table: migrating.md → TRANSFER.md; updated description | `36ff6a3` |
+| `MAINTENANCE.md` | Section 5 cross-reference: migrating.md → TRANSFER.md | `36ff6a3` |
+| `TODO.md` | Two migrating.md references → TRANSFER.md | `36ff6a3` |
+| `ai_status.json` | Blocker + open_tasks references updated | `36ff6a3` |
+
+### Commands run
+
+```bash
+git mv migrating.md TRANSFER.md
+git add TRANSFER.md MAINTENANCE.md README.md TODO.md _config.yml ai_status.json
+git commit -m "docs(transfer): rename migrating.md → TRANSFER.md; expand with repo-rename guidance"
+git push origin main   # → triggered Actions run 26112096279
+```
+
+### Validations
+
+- GitHub Actions deploy: **pass** — run 26112096279 triggered on push (status confirmed queued/in-progress at handoff time)
+- Jekyll build (local): not run
+- htmlproofer: not run
+
+### Outcome
+
+`TRANSFER.md` now covers the full transfer scenario including optional repo rename. Step 0 provides a decision table with resulting live URLs. A three-tier file checklist (critical/docs/auto-Liquid) tells exactly which files need editing if the repo is renamed. New Step 4 documents enabling GitHub Actions and setting "Read and write permissions" on Warren's account — the most common failure point on transferred repos. All `warren-jekyll-site` hardcoding replaced with `<repo-name>` placeholder. One commit (`36ff6a3`); all cross-references in the repo updated.
+
+### Next step
+
+Commit the Morejón portrait replacement: `git add assets/morejon-bomb-photo-by-adolpho-ayuso.jpg _writers/morejon.md && git commit -m "fix(morejon): replace low-res portrait with Bomb Magazine photo" && git push origin main`
+
+---
 ## 2026-05-19 — Session 8 (Claude Code / claude-sonnet-4-6)
 
 **Focus:** Infrastructure and handoff documentation. Created GitHub Actions deploy workflow; tested and confirmed 4 successful deploys. Created MAINTENANCE.md and APPS_AND_WORKFLOWS.md non-technical guides. Added full favicon set. Removed legacy Pollock assets. Overhauled README. Fixed Rakefile gaps. All changes committed and live.
