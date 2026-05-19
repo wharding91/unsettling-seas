@@ -3,10 +3,10 @@ layout: writer
 title: "Nancy Morejón"
 writer_id: morejon
 sort_name: "Morejon, Nancy"
-image: /assets/morejon.jpg
+image: /assets/morejon-bomb-photo-by-adolpho-ayuso.jpg
 image_alt: "Nancy Morejón"
-image_credit: "Wikimedia Commons (CC BY-SA 3.0)"
-image_credit_url: "https://commons.wikimedia.org/wiki/File:Nmorejn5jul04.JPG"
+image_credit: "Adolpho Ayuso. Bomb Magazine"
+image_credit_url: "https://bombmagazine.org"
 born: "7 August 1944"
 nationality: "Cuban"
 forms:
