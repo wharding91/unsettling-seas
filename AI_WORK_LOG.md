@@ -3,6 +3,82 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-05-19 — Session 8 (Claude Code / claude-sonnet-4-6)
+
+**Focus:** Infrastructure and handoff documentation. Created GitHub Actions deploy workflow; tested and confirmed 4 successful deploys. Created MAINTENANCE.md and APPS_AND_WORKFLOWS.md non-technical guides. Added full favicon set. Removed legacy Pollock assets. Overhauled README. Fixed Rakefile gaps. All changes committed and live.
+
+### Files changed
+
+| File | Action | Commit |
+|---|---|---|
+| `.github/workflows/deploy.yml` | Created — automated build + gh-pages deploy on push to main | `189b84c` |
+| `MAINTENANCE.md` | Created — 5-section non-technical content-update guide | `189b84c` |
+| `APPS_AND_WORKFLOWS.md` | Created — 4-section macOS app setup guide for non-technical editors | `189b84c` |
+| `_config.yml` | Added MAINTENANCE.md and APPS_AND_WORKFLOWS.md to exclude list | `189b84c` |
+| `.gitignore` | Added .gstack/ | `189b84c` |
+| `_bibliography/articles.bib` | Deleted — legacy Pollock artifact, unreferenced | `189b84c` |
+| `_bibliography/books.bib` | Deleted — legacy Pollock artifact, unreferenced | `189b84c` |
+| `_bibliography/chapters.bib` | Deleted — legacy Pollock artifact, unreferenced | `189b84c` |
+| `_bibliography/lectures.bib` | Deleted — legacy Pollock artifact, unreferenced | `189b84c` |
+| `assets/favicon.ico` | Replaced — new multi-size version (16×16, 32×32 embedded) | `94d7cad` |
+| `assets/favicon-16x16.png` | Created | `94d7cad` |
+| `assets/favicon-32x32.png` | Created | `94d7cad` |
+| `assets/favicon-48x48.png` | Created | `94d7cad` |
+| `assets/favicon-512.png` | Created | `94d7cad` |
+| `assets/apple-touch-icon.png` | Created — 180×180 iOS home screen icon | `94d7cad` |
+| `assets/android-chrome-192x192.png` | Created — PWA manifest icon | `94d7cad` |
+| `assets/android-chrome-512x512.png` | Created — PWA manifest icon | `94d7cad` |
+| `site.webmanifest` | Created — Liquid-templated PWA manifest at repo root | `94d7cad` |
+| `_includes/head.html` | Updated Icons block — single shortcut icon → full 5-tag favicon set | `94d7cad` |
+| `assets/pollock.jpg` | Deleted — upstream Pollock artifact, unreferenced | `e27957a` |
+| `README.md` | Overhauled — 7 corrections; Build & deployment rewrite; new sections | `303adbf`, `76e8d7a` |
+| `migrating.md` | Updated Step 7 — removed rake ed:publish; explained Actions deploy | `303adbf` |
+| `Rakefile` | Fixed — added JEKYLL_ENV=production and File.write(_site/.nojekyll) | `76e8d7a` |
+
+### Commands run
+
+```bash
+# Staged and committed in 5 commits
+git add .github/workflows/deploy.yml MAINTENANCE.md APPS_AND_WORKFLOWS.md _config.yml .gitignore _bibliography/*.bib
+git commit -m "chore(handoff): add Actions deploy workflow, handoff docs, remove upstream bib files"
+git push origin main   # → triggered Actions run 26109062683 (39s, green)
+
+git add assets/ site.webmanifest _includes/head.html
+git commit -m "feat(favicon): add full favicon set and web manifest"
+git push origin main   # → triggered Actions run 26109690244 (green)
+
+git add assets/pollock.jpg
+git commit -m "chore(assets): remove upstream Pollock portrait"
+git push origin main   # → triggered Actions run 26109934953 (14s, green)
+
+git add README.md migrating.md
+git commit -m "docs: update README and migrating.md to reflect current repo state"
+git push origin main   # → triggered Actions run 26110481454 (green)
+
+git add Rakefile README.md
+git commit -m "docs(deploy): fully document both deploy paths; patch Rakefile gaps"
+git push origin main   # → triggered Actions run 26111406101 (green)
+
+# Relay state inspection
+python scripts/update_relay_state.py --show
+```
+
+### Validations
+
+- GitHub Actions workflow: **pass** — 4 runs confirmed green (run IDs 26109062683, 26109690244, 26109934953, 26111406101); build times 14–39s; gem cache warmed after first run
+- Live site smoke test: **pass** — homepage, /writers/adisa/, /writers/trouillot/ all returned HTTP 200
+- Jekyll build (local): not run — Actions runs confirm build passes on ubuntu-latest
+- htmlproofer: not run
+
+### Outcome
+
+GitHub Actions now handles all deployments automatically on push to main — the manual `rake ed:publish` step is retired for routine use. Five commits landed across documentation, infrastructure, and asset cleanup. The Rakefile fallback was patched to match Actions output exactly (JEKYLL_ENV + .nojekyll). README is fully current: correct repo tree, accurate deployment docs, Node.js deprecation timeline and fix, links to all three non-technical guides. Legacy Pollock assets (4 .bib files, 1 portrait) are removed. Full favicon set is live.
+
+### Next step
+
+Review `assets/morejon_01_body.jpg` (appeared as untracked this session — likely a replacement candidate for the low-res Morejón portrait). If correct, update `_writers/morejon.md` front matter and commit: `git add assets/morejon_01_body.jpg _writers/morejon.md && git commit -m "fix(morejon): replace low-res portrait" && git push origin main`
+
+---
 ## 2026-05-18 — Session 7 (Claude Code / claude-sonnet-4-6)
 
 **Focus:** Replaced homepage lorem ipsum and H1 typo; built five new writer profile pages (Herrera, Morejón, Philip, Ríos, Trouillot) with downloaded portraits; removed all "coming soon" labels; pushed main and deployed gh-pages.
