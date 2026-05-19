@@ -3,6 +3,139 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-05-18 — Session 7 (Claude Code / claude-sonnet-4-6)
+
+**Focus:** Replaced homepage lorem ipsum and H1 typo; built five new writer profile pages (Herrera, Morejón, Philip, Ríos, Trouillot) with downloaded portraits; removed all "coming soon" labels; pushed main and deployed gh-pages.
+
+### Files changed
+
+| File | Action | Commit |
+|---|---|---|
+| `index.html` | Fixed H1 typo ("Bibligraphic" → "Bibliographic"), replaced five-paragraph lorem ipsum About section with Warren Harding's project description, added `<em>` tags, removed "coming soon" spans, added hyperlinks for all seven writers | `edb1bd0`, `b7cd895` |
+| `_config.yml` | Fixed same spelling typo in `description:` field | `edb1bd0` |
+| `_writers/herrera.md` | Created new writer profile page (layout: writer) for Georgina Herrera | `b7cd895` |
+| `_writers/morejon.md` | Created new writer profile page for Nancy Morejón | `b7cd895` |
+| `_writers/philip.md` | Created new writer profile page for M. NourbeSe Philip | `b7cd895` |
+| `_writers/rios.md` | Created new writer profile page for Soleida Ríos | `b7cd895` |
+| `_writers/trouillot.md` | Created new writer profile page for Évelyne Trouillot | `b7cd895` |
+| `assets/herrera.jpg` | Downloaded portrait from Cuba 50 (cuba50.org) | `b7cd895` |
+| `assets/morejon.jpg` | Downloaded portrait from Wikimedia Commons (CC BY-SA 3.0) | `b7cd895` |
+| `assets/philip.jpg` | Downloaded portrait from nourbese.com (official author site) | `b7cd895` |
+| `assets/rios.jpg` | Downloaded portrait from Festival Internacional de Poesía de Buenos Aires | `b7cd895` |
+| `assets/trouillot.jpg` | Downloaded portrait from Wikimedia Commons (CC BY-SA 3.0, Lionel Allorge) | `b7cd895` |
+| `TODO.md` | Marked lorem ipsum and five-writer tasks complete | uncommitted handoff update |
+| `ai_status.json` | Updated focus, SHA, next step, blockers, open tasks, completed list | uncommitted handoff update |
+| `AI_WORK_LOG.md` | Prepended this Session 7 handoff entry | uncommitted handoff update |
+
+### Commands run
+
+```bash
+# Image downloads
+curl -sL "https://cuba50.org/wp-content/uploads/2021/12/georgina-herrera-755x490-1.jpg" -o assets/herrera.jpg
+curl -sL "https://upload.wikimedia.org/wikipedia/commons/6/6f/Nmorejn5jul04.JPG" -o assets/morejon.jpg
+curl -sL "https://www.nourbese.com/wp-content/uploads/2011/03/nourbese-laughing1.jpg" -o assets/philip.jpg
+curl -sL "https://festivalpoesiabsas.com.ar/wp-content/uploads/2022/09/participantes-soleidarios-566x770.jpg" -o assets/rios.jpg
+curl -sL "https://upload.wikimedia.org/wikipedia/commons/9/96/%C3%89velyne_Trouillot.jpg" -o assets/trouillot.jpg
+
+# Builds and local server
+PATH=/Users/codycarvel/.rubies/ruby-3.4.4/bin:$PATH bundle _2.6.9_ exec jekyll build
+PATH=/Users/codycarvel/.rubies/ruby-3.4.4/bin:$PATH bundle _2.6.9_ exec jekyll serve --host 127.0.0.1 --port 4000
+
+# Git and deployment
+git add index.html _config.yml
+git commit -m "content(index): replace lorem ipsum and fix H1 typo"
+git push origin main
+PATH=/Users/codycarvel/.rubies/ruby-3.4.4/bin:$PATH bundle _2.6.9_ exec rake ed:publish
+
+git add index.html _writers/herrera.md _writers/morejon.md _writers/philip.md _writers/rios.md _writers/trouillot.md assets/herrera.jpg assets/morejon.jpg assets/philip.jpg assets/rios.jpg assets/trouillot.jpg
+git commit -m "feat(writers): add five new writer profile pages"
+git push origin main
+PATH=/Users/codycarvel/.rubies/ruby-3.4.4/bin:$PATH bundle _2.6.9_ exec rake ed:publish
+```
+
+### Validations
+
+- Jekyll build: pass — clean for both commits; only pre-existing Sass `@import` deprecation warnings.
+- Local server: pass — all seven writer pages returned 200; sidebar alphabetical order confirmed (Adisa, Brand, Herrera, Morejón, Philip, Ríos, Trouillot).
+- Live homepage: pass — verified via browse skill; all links active, no "coming soon" labels.
+- gh-pages force-push: pass — `d97beef...3684ec1` confirmed in deploy output; 35 files in branch including five new writer pages.
+- HTML-Proofer: not run this session.
+
+### Outcome
+
+Homepage lorem ipsum is replaced with Warren Harding's real project description and the H1 typo is fixed. All five placeholder writers (Herrera, Morejón, Philip, Ríos, Trouillot) now have full profile pages matching the Brand/Adisa layout: portrait with attribution, infobox, bibliography links, selected works, thematic subjects, narrative biography, and Literary Significance section. Sidebar auto-alphabetizes correctly across all seven writers via `sort_name`. Main is pushed at `b7cd895`; gh-pages is deployed at `3684ec1`.
+
+### Next step
+
+Update the About paragraph in `index.html` — it still reads "five additional writers currently in development"; all seven are now live. Edit that sentence, rebuild, and deploy:
+`PATH=/Users/codycarvel/.rubies/ruby-3.4.4/bin:$PATH bundle _2.6.9_ exec rake ed:publish`
+
+---
+## 2026-05-18 — Session 6 (Codex)
+
+**Focus:** Standardized the writer profile design for Dionne Brand and Opal Palmer Adisa, documented the pattern, pushed `main`, and published GitHub Pages.
+
+### Files changed
+
+| File | Action | Commit |
+|---|---|---|
+| `_layouts/writer.html` | Added reusable writer profile layout and removed lower duplicate bibliography section after moving links into infobox | `2888954`, `7ee3fbc` |
+| `_includes/writer-infobox.html` | Added reusable writer infobox with image, facts, selected works, subjects, and generated bibliography links | `2888954`, `7ee3fbc` |
+| `_sass/_ed.scss` | Added writer profile/infobox styling and left the rejected image-crop experiment commented out | `2888954`, `7ee3fbc` |
+| `_writers/brand.md` | Converted Dionne Brand into the writer layout prototype and added `sort_name` metadata | `2888954`, `da000f2` |
+| `_writers/adisa.md` | Converted Opal Palmer Adisa to the shared writer layout with structured front matter, portrait metadata, bibliography links, and substantive body copy | `da000f2` |
+| `_includes/sidebar.html` | Changed writer ordering from title sort to `sort_name` sort so sidebar is alphabetical by last name | `da000f2` |
+| `README.md` | Documented writer authoring, bibliography pages, `sort_name`, and the GitHub Pages publish workflow | `2888954`, `7ee3fbc`, `da000f2` |
+| `TODO.md` | Marked writer-profile lorem ipsum replacement complete; homepage lorem ipsum remains open | uncommitted handoff update |
+| `ai_status.json` | Updated current focus, exact next step, open tasks, blockers, SHA, and session completions | uncommitted handoff update |
+| `AI_WORK_LOG.md` | Prepended this Session 6 handoff entry | uncommitted handoff update |
+
+### Commands run
+
+```bash
+# Relay/status inspection
+git branch --show-current
+git status --short
+git log -n 5 --oneline
+git diff --stat HEAD~1..HEAD
+python scripts/update_relay_state.py --next-step "Replace the placeholder About copy in index.html, then run: PATH=/Users/codycarvel/.rubies/ruby-3.4.4/bin:$PATH bundle _2.6.9_ exec jekyll build" --focus "Standardized writer profile layout for Dionne Brand and Opal Palmer Adisa; pushed main and published gh-pages." --tool "Codex"
+
+# Build and proofing
+PATH=/Users/codycarvel/.rubies/ruby-3.4.4/bin:$PATH bundle _2.6.9_ exec jekyll build
+PATH=/Users/codycarvel/.rubies/ruby-3.4.4/bin:$PATH bundle _2.6.9_ exec htmlproofer ./_site --disable-external --swap-urls '^/warren-jekyll-site/:/'
+
+# Local and live checks
+PATH=/Users/codycarvel/.rubies/ruby-3.4.4/bin:$PATH bundle _2.6.9_ exec jekyll serve --host 127.0.0.1 --port 4000
+curl -s -o /tmp/adisa-preview.html -w "%{http_code}" http://127.0.0.1:4000/warren-jekyll-site/writers/adisa/
+curl -s -L https://raw.githubusercontent.com/ccarvel/warren-jekyll-site/gh-pages/writers/adisa/index.html -o /tmp/adisa-ghpages-raw.html -w "%{http_code}"
+curl -s -L https://ccarvel.github.io/warren-jekyll-site/writers/adisa/ -o /tmp/adisa-live-final.html -w "%{http_code}"
+
+# Git and deployment
+git add README.md _includes/sidebar.html _writers/adisa.md _writers/brand.md
+git commit -m "Bring Adisa into the shared writer profile pattern" ...
+git push origin main
+PATH=/Users/codycarvel/.rubies/ruby-3.4.4/bin:$PATH bundle _2.6.9_ exec rake ed:publish
+git ls-remote origin refs/heads/main refs/heads/gh-pages
+```
+
+### Validations
+
+- Jekyll build: pass — `bundle _2.6.9_ exec jekyll build` completed; Sass `@import` deprecation warnings remain non-fatal.
+- HTML-Proofer: pass — checked 9 generated HTML files and 15 internal links with external checks disabled.
+- Local Adisa preview: pass — local URL returned `200` and included the writer infobox, bibliography links, and Adisa-before-Brand sidebar order.
+- GitHub Pages branch: pass — `gh-pages` force-pushed to `d7aa9f5`; raw branch HTML contains the new Adisa writer infobox and corrected sidebar order.
+- Live GitHub Pages: pass — `https://ccarvel.github.io/warren-jekyll-site/writers/adisa/` returned `200` and included the new Adisa writer infobox, bibliography links, and corrected sidebar order.
+- GitHub Actions deployment status: not run — live GitHub Pages content was verified directly instead.
+
+### Outcome
+
+Dionne Brand is now the reusable writer-page prototype and Opal Palmer Adisa has been converted to the same layout. Bibliography links are generated in each writer infobox, the sidebar sorts writers by last name through `sort_name`, and README authoring instructions now describe that workflow. The source branch `main` is pushed at `da000f2`; the deployed `gh-pages` branch is pushed at `d7aa9f5`; the live Adisa page was verified after deployment. The only remaining placeholder lorem ipsum found by `rg` is in `index.html`.
+
+### Next step
+
+Replace the placeholder About copy in `index.html`, then run: `PATH=/Users/codycarvel/.rubies/ruby-3.4.4/bin:$PATH bundle _2.6.9_ exec jekyll build`
+
+---
 ## 2026-05-13 — Session 5 (Claude Code / claude-sonnet-4-6)
 
 **Focus:** Local directory rename only — no source file changes this session.

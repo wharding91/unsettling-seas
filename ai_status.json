@@ -1,32 +1,47 @@
 {
-  "last_updated": "2026-05-13",
-  "last_session": "session 5 - Claude Code (claude-sonnet-4-6)",
+  "last_updated": "2026-05-18",
+  "last_session": "session 7 — Claude Code",
   "branch": "main",
-  "git_sha": "d74a055",
-  "worktree_state": "clean (2 untracked tooling dirs: .claude/, .omx/)",
+  "git_sha": "b7cd895",
+  "worktree_state": "4 unstaged (AI_WORK_LOG.md, TODO.md, ai_status.json, .gitignore), 2 untracked (.claude/, .omx/; pre-existing/generated tooling dirs)",
   "local_directory": "/Users/codycarvel/Documents/GitHub/warren-jekyll-site",
-  "current_focus": "Local directory renamed to match remote repo name. Site is live at ccarvel.github.io/warren-jekyll-site. Next action is repo transfer to Warren's GitHub account.",
-  "exact_next_step": "Follow migrating.md step-by-step to transfer the repo to Warren's GitHub account: initiate the transfer at github.com/ccarvel/warren-jekyll-site/settings → Danger Zone → Transfer repository, entering Warren's GitHub username as destination.",
+  "current_focus": "Replaced homepage lorem ipsum and H1 typo; added full writer profile pages for five new writers (Herrera, Morejón, Philip, Ríos, Trouillot) with portraits and biographies; removed coming-soon labels; pushed main and deployed gh-pages.",
+  "exact_next_step": "Update the About paragraph in index.html — it still says 'five additional writers currently in development'; all seven are now live. Edit the sentence, rebuild, and deploy: PATH=/Users/codycarvel/.rubies/ruby-3.4.4/bin:$PATH bundle _2.6.9_ exec rake ed:publish",
   "blockers": [
     {
       "id": "repo-transfer-pending",
       "description": "Repo is still under ccarvel's account. Warren's GitHub username is needed to initiate transfer. See migrating.md for full steps.",
       "severity": "medium",
       "owner": "Cody + Warren Harding"
+    },
+    {
+      "id": "morejon-portrait-low-res",
+      "description": "assets/morejon.jpg sourced from Wikimedia Commons is only 6KB — very low resolution. A higher-quality press photo should replace it when one is found.",
+      "severity": "low",
+      "owner": "Cody"
     }
   ],
   "open_tasks": [
+    "Update About paragraph in index.html (still says 'five additional writers currently in development')",
+    "Find higher-quality portrait for Nancy Morejón (current morejon.jpg is 6KB / very low res)",
     "Transfer repo to Warren's GitHub account (see migrating.md)",
     "Update url: and baseurl: in _config.yml after transfer",
     "Fix missing references.bib in _bibliography/",
-    "Replace lorem ipsum in index.html, _writers/adisa.md, _writers/brand.md",
     "Update jQuery 1.11.3 in search.html",
     "Fix fb:admins upstream metadata in _includes/head.html",
     "Add content license statement"
   ],
   "completed_this_session": [
-    "Renamed local directory from jekyll-site-theme to warren-jekyll-site to match remote repo name",
-    "Verified git remote, status, and log intact after rename — no git reconfiguration needed"
+    "Fixed H1 typo 'Bibligraphic' → 'Bibliographic' in index.html",
+    "Fixed description: field in _config.yml (same typo)",
+    "Replaced five-paragraph lorem ipsum About section with Warren Harding's real project description",
+    "Added <em> tags around 'Unsettling Seas' in the About paragraph",
+    "Created five new writer profile pages: herrera.md, morejon.md, philip.md, rios.md, trouillot.md",
+    "Downloaded and saved five writer portrait images to assets/ with source URLs recorded in front matter",
+    "Removed all 'coming soon' spans from index.html; added hyperlinks for all seven writers",
+    "Sidebar auto-alphabetizes by sort_name — new writers slot in correctly (Adisa, Brand, Herrera, Morejón, Philip, Ríos, Trouillot)",
+    "Committed edb1bd0 (typo + lorem ipsum), b7cd895 (five new writer pages)",
+    "Pushed main and deployed gh-pages at 3684ec1; verified locally via browse skill"
   ],
   "relay_version": "0.1.0",
   "todo_file": "TODO.md",

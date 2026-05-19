@@ -18,11 +18,11 @@ Issues and improvements identified during repository audit (2026-04-26).
 
 ## Content
 
-- [ ] **Replace lorem ipsum in `index.html`** — the "About Unsettling Seas" section contains five paragraphs of placeholder text. Replace with real scholarly copy describing the project's scope and methodology.
+- [x] **Replace lorem ipsum in `index.html`** — replaced with Warren Harding's real project description in commit `edb1bd0`. H1 typo ("Bibligraphic") also fixed in the same commit.
 
-- [ ] **Replace lorem ipsum in writer profiles** — `_writers/adisa.md` and `_writers/brand.md` each contain two paragraphs of dummy text after the opening biographical sentence. Replace with substantive biographical content.
+- [x] **Replace lorem ipsum in writer profiles** — `_writers/adisa.md` and `_writers/brand.md` now use the shared writer profile layout with substantive body copy and generated bibliography links in the infobox.
 
-- [x] **Add content for five placeholder writers** — Georgina Herrera, Nancy Morejón, M. Nourbese Philip, Soleida Ríos, and Évelyne Trouillot now have visible "coming soon" labels on the homepage.
+- [x] **Add content for five placeholder writers** — Georgina Herrera, Nancy Morejón, M. NourbeSe Philip, Soleida Ríos, and Évelyne Trouillot now have full writer profile pages (layout: writer, portrait, infobox, biography) committed in `b7cd895`. "Coming soon" labels removed; all seven writers linked from homepage and sidebar.
 
 ## Assets & Dependencies
 
