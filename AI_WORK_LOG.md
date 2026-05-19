@@ -3,6 +3,39 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-05-19 — Session 11 (Claude Code / claude-sonnet-4-6)
+
+**Focus:** Revised About paragraph in index.html; produced Warren meeting agenda.
+
+### Files changed
+
+| File | Action | Commit |
+|---|---|---|
+| `index.html` | About paragraph revised — early development note, all 7 writers equal, style fixes | `40d4cd9` |
+
+### Commands run
+
+```bash
+git add index.html
+git commit -m "fix(index): revise About paragraph — equal footing for all 7 writers, note early development"
+git push origin main
+```
+
+### Validations
+
+- GitHub Actions deploy: triggered by 40d4cd9 — not monitored to completion at handoff
+- Jekyll build (local): not run
+- htmlproofer: not run
+
+### Outcome
+
+About paragraph in index.html no longer implies Adisa and Brand are more complete than the other five writers. "Bibliographic-generated" (non-standard) corrected to "bibliographic"; "in early development" added to first sentence; all seven writers listed in a single flat clause; technical Jekyll Scholar implementation detail removed from public-facing copy; en-dash and "one hundred" style fixed. Session also produced a structured 1-hour meeting agenda for Warren covering site walkthrough, feedback, repo transfer decision, and docs walkthrough — not committed to repo.
+
+### Next step
+
+Fix Node.js deprecation before Jun 2 2026: in `.github/workflows/deploy.yml` replace `peaceiris/actions-gh-pages@v3` with `JamesIves/github-pages-deploy-action@v4`. Full before/after diff in README.md Build & deployment section.
+
+---
 ## 2026-05-19 — Session 10 (Claude Code / claude-sonnet-4-6)
 
 **Focus:** Bibliography infrastructure for all 7 writers; Zotero pipeline documentation; search documentation; diagnosed and fixed Actions build failure.

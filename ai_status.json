@@ -1,22 +1,22 @@
 {
   "last_updated": "2026-05-19",
-  "last_session": "session 10 — Claude Code",
+  "last_session": "session 11 — Claude Code",
   "branch": "main",
-  "git_sha": "23a68e2",
-  "worktree_state": "clean — 2 permanent untracked tooling dirs (.claude/, .omx/) + gh-actions-errors.txt (temp, safe to delete)",
+  "git_sha": "40d4cd9",
+  "worktree_state": "clean — 2 permanent untracked tooling dirs (.claude/, .omx/) only",
   "local_directory": "/Users/codycarvel/Documents/GitHub/warren-jekyll-site",
-  "current_focus": "Completed bibliography infrastructure for all 7 writers: created _texts/ listing pages, committed .bib files, fixed Actions build failures. Expanded MAINTENANCE.md Zotero pipeline guide and added Search documentation to README.md.",
-  "exact_next_step": "Fix Node.js deprecation before Jun 2 2026 deadline: in .github/workflows/deploy.yml replace peaceiris/actions-gh-pages@v3 block with JamesIves/github-pages-deploy-action@v4 (full before/after diff in README.md Build & deployment section). Then remove stale low-res portrait: git rm assets/morejon.jpg && git commit && git push.",
+  "current_focus": "Revised About paragraph in index.html — all 7 writers on equal footing, early development noted. Session also produced meeting agenda for Warren review.",
+  "exact_next_step": "Fix Node.js deprecation before Jun 2 2026 deadline: in .github/workflows/deploy.yml replace peaceiris/actions-gh-pages@v3 block with JamesIves/github-pages-deploy-action@v4 (full before/after diff in README.md Build & deployment section).",
   "blockers": [
     {
       "id": "nodejs-deprecation",
-      "description": "peaceiris/actions-gh-pages@v3 in .github/workflows/deploy.yml runs on Node.js 20. GitHub FORCES upgrade Jun 2 2026 (13 days); removes Node 20 Sep 16 2026. Fix: swap to JamesIves/github-pages-deploy-action@v4 with single-commit: true. Full before/after diff in README.md Build & deployment section.",
+      "description": "peaceiris/actions-gh-pages@v3 in .github/workflows/deploy.yml runs on Node.js 20. GitHub FORCES upgrade Jun 2 2026 (~13 days from 2026-05-19); removes Node 20 Sep 16 2026. Fix: swap to JamesIves/github-pages-deploy-action@v4 with single-commit: true. Full before/after diff in README.md Build & deployment section.",
       "severity": "high",
       "owner": "Cody"
     },
     {
       "id": "repo-transfer-pending",
-      "description": "Repo is still under ccarvel's account. Warren's GitHub username and preferred final repo name (e.g. unsettling-seas) needed before initiating transfer. See TRANSFER.md for full checklist including Actions permissions step and repo-rename file table.",
+      "description": "Repo is still under ccarvel's account. Warren's GitHub username and preferred final repo name (e.g. unsettling-seas) needed before initiating transfer. See TRANSFER.md for full checklist including Actions permissions step and repo-rename file table. Meeting with Warren scheduled 2026-05-19 — decisions may be made then.",
       "severity": "medium",
       "owner": "Cody + Warren Harding"
     }
@@ -24,7 +24,6 @@
   "open_tasks": [
     "URGENT — Fix Node.js deprecation before Jun 2 2026: swap peaceiris/actions-gh-pages@v3 → JamesIves/github-pages-deploy-action@v4 (diff in README)",
     "Remove superseded low-res portrait: git rm assets/morejon.jpg",
-    "Update About paragraph in index.html (still reads 'five additional writers currently in development')",
     "Add articles.bib for the 5 new writers when Zotero exports are ready (herrera, morejon, philip, rios, trouillot)",
     "Transfer repo to Warren's GitHub account — confirm final repo name first; see TRANSFER.md",
     "Update url: and baseurl: in _config.yml after transfer (and rename if applicable)",
@@ -35,12 +34,8 @@
     "Add content license statement"
   ],
   "completed_this_session": [
-    "Updated MAINTENANCE.md + README.md local dev command: bundle exec jekyll serve --baseurl '' (commit 600594f)",
-    "Created _texts/ listing pages for 5 writers: herrera, morejon, philip, rios, trouillot (commit e283e3f)",
-    "Expanded MAINTENANCE.md Section 3 into full 4-stage Zotero-to-Jekyll pipeline guide with checklist (commit 34ccc4f)",
-    "Committed 5 missing .bib files to fix Actions build failure (ENOENT on herrera/books.bib); build now passes (commit bf6ee8e)",
-    "Added ## Search section to README.md: elasticlunr architecture, what is/isn't indexed, automatic rebuild, extension guide, jQuery TODO (commit 23a68e2)",
-    "Explained _texts/ vs _bibliography/ distinction and zot-to-jekyll.rb actual function (key normalization + PDF renaming, not page generation)"
+    "Revised About paragraph in index.html: dropped 'bibliographic-generated', added 'in early development', replaced Adisa/Brand + five-in-development construction with flat list of all 7 writers, removed technical Jekyll Scholar implementation detail, fixed en-dash and 'one hundred' style (commit 40d4cd9)",
+    "Created 1-hour meeting agenda for Warren: site walkthrough, feedback, repo transfer decision, docs walkthrough (MAINTENANCE.md, APPS_AND_WORKFLOWS.md, README.md)"
   ],
   "relay_version": "0.1.0",
   "todo_file": "TODO.md",
