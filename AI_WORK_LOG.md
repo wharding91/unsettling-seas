@@ -3,6 +3,55 @@
 Newest entries at top. Never rewrite or delete existing entries.
 
 ---
+## 2026-05-19 — Session 10 (Claude Code / claude-sonnet-4-6)
+
+**Focus:** Bibliography infrastructure for all 7 writers; Zotero pipeline documentation; search documentation; diagnosed and fixed Actions build failure.
+
+### Files changed
+
+| File | Action | Commit |
+|---|---|---|
+| `MAINTENANCE.md` | `--baseurl ""` local dev command; Note updated | `600594f` |
+| `README.md` | `--baseurl ""` local dev command (2 occurrences) | `600594f` |
+| `_texts/herrera/books.md` | Created — renders _bibliography/herrera/books.bib | `e283e3f` |
+| `_texts/morejon/books.md` | Created — renders _bibliography/morejon/books.bib | `e283e3f` |
+| `_texts/philip/books.md` | Created — renders _bibliography/philip/books.bib | `e283e3f` |
+| `_texts/rios/books.md` | Created — renders _bibliography/rios/books.bib | `e283e3f` |
+| `_texts/trouillot/books.md` | Created — renders _bibliography/trouillot/books.bib | `e283e3f` |
+| `MAINTENANCE.md` | Section 3 expanded: 4-stage Zotero pipeline guide + checklist | `34ccc4f` |
+| `_bibliography/herrera/books.bib` | Committed (was on disk, never staged — caused ENOENT build failure) | `bf6ee8e` |
+| `_bibliography/morejon/books.bib` | Committed | `bf6ee8e` |
+| `_bibliography/philip/books.bib` | Committed | `bf6ee8e` |
+| `_bibliography/rios/books.bib` | Committed | `bf6ee8e` |
+| `_bibliography/trouillot/books.bib` | Committed | `bf6ee8e` |
+| `README.md` | Added `## Search` section (elasticlunr architecture, indexed fields, extension guide) | `23a68e2` |
+
+### Commands run
+
+```bash
+git add MAINTENANCE.md README.md && git commit -m "docs(local-dev): use --baseurl \"\" for local Jekyll server" && git push
+git add _texts/herrera/books.md _texts/morejon/books.md _texts/philip/books.md _texts/rios/books.md _texts/trouillot/books.md && git commit -m "feat(texts): add bibliography listing pages for five writers" && git push
+git add MAINTENANCE.md && git commit -m "docs(maintenance): expand Section 3 into full Zotero-to-Jekyll pipeline guide" && git push
+git add _bibliography/herrera/books.bib ... && git commit -m "feat(bibliography): add Zotero-exported books.bib for five writers" && git push
+git add README.md && git commit -m "docs(readme): add Search section explaining elasticlunr implementation" && git push
+```
+
+### Validations
+
+- GitHub Actions build: **passed** after committing missing .bib files (run triggered by bf6ee8e)
+- GitHub Actions builds for 600594f, e283e3f, 34ccc4f: **failed** (ENOENT on herrera/books.bib — .bib files not yet committed)
+- Jekyll build (local): not run
+- htmlproofer: not run
+
+### Outcome
+
+Bibliography infrastructure is now complete for all 7 writers — every writer has a `_texts/<writer>/books.md` page and a committed `_bibliography/<writer>/books.bib`. The Actions build passes. Session also expanded the Zotero pipeline documentation in MAINTENANCE.md into a full 4-stage guide and added a comprehensive Search section to README.md explaining the elasticlunr architecture, what content is and is not indexed, and how to extend search to writer profiles. Discovered and explained that `zot-to-jekyll.rb` is a key normalizer + PDF renamer, not a page generator.
+
+### Next step
+
+Fix Node.js deprecation before Jun 2 2026 deadline: in `.github/workflows/deploy.yml` replace the `peaceiris/actions-gh-pages@v3` step with `JamesIves/github-pages-deploy-action@v4`. Full before/after diff is in README.md Build & deployment section.
+
+---
 ## 2026-05-19 — Session 9 (Claude Code / claude-sonnet-4-6)
 
 **Focus:** Replaced low-resolution Morejón portrait with high-resolution Bomb Magazine photo.
