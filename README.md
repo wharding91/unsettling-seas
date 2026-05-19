@@ -95,7 +95,7 @@ Bibliographic resources for Caribbean women's and feminist creative writing, 198
 │   └── update_relay_state.py  # CLI helper for AI agent handoff state
 ├── MAINTENANCE.md          # Non-technical content-update guide (5 sections)
 ├── APPS_AND_WORKFLOWS.md   # macOS app setup guide for non-technical editors
-├── migrating.md            # Step-by-step repo transfer guide (ccarvel → Warren)
+├── TRANSFER.md             # Step-by-step repo transfer guide (ccarvel → Warren)
 ├── AI_CONTEXT.md           # AI agent context (repo overview, commands, conventions)
 ├── AI_WORK_LOG.md          # Append-only AI session log
 ├── ai_status.json          # Machine-readable current focus and next step
@@ -465,7 +465,7 @@ Three non-technical guides live at the repo root and are excluded from the Jekyl
 |---|---|---|
 | [`MAINTENANCE.md`](MAINTENANCE.md) | Non-technical content editors | Directory map (safe vs. system files), step-by-step bio editing via GitHub web UI, adding an 8th writer, Zotero export guide, local preview setup, troubleshooting |
 | [`APPS_AND_WORKFLOWS.md`](APPS_AND_WORKFLOWS.md) | Non-technical macOS users taking over the site | Three setup pathways (MacDown/GitHub Desktop → VS Code/GitHub Desktop → VS Code only), VS Code extension checklist, click-by-click task workflows, macOS Smart Quotes and hidden-extension warnings |
-| [`migrating.md`](migrating.md) | Cody + Warren | 8-step checklist for transferring the repository from `ccarvel` to Warren's GitHub account, re-enabling Pages, updating `_config.yml`, and verifying the live site |
+| [`TRANSFER.md`](TRANSFER.md) | Cody + Warren | Step-by-step checklist for transferring the repository from `ccarvel` to Warren's GitHub account, choosing the final repo name, updating all affected config and docs files, enabling Actions permissions, re-enabling Pages, and verifying the live site |
 
 ## Data & assets
 

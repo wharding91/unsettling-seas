@@ -286,7 +286,7 @@ To stop the server, press **`Ctrl + C`** in the terminal.
 2. If the repository has been transferred to a new GitHub account, the `url:` and `baseurl:` values will need to be updated to reflect the new username and repository name.
 3. Never hardcode paths like `/assets/image.jpg` in writer pages — always use `{{ site.baseurl }}/assets/image.jpg` or `{{ '/assets/image.jpg' | relative_url }}`. All existing writer pages already follow this convention.
 
-> **Note for after the repo transfer:** Once the repository is moved to Warren's GitHub account, update `url:` and `baseurl:` in `_config.yml` before deploying. The `migrating.md` file in the repository root has step-by-step instructions for the full transfer process.
+> **Note for after the repo transfer:** Once the repository is moved to Warren's GitHub account, update `url:` and `baseurl:` in `_config.yml` before deploying. The `TRANSFER.md` file in the repository root has step-by-step instructions for the full transfer process.
 
 ---
 

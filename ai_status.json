@@ -10,7 +10,7 @@
   "blockers": [
     {
       "id": "repo-transfer-pending",
-      "description": "Repo is still under ccarvel's account. Warren's GitHub username is needed to initiate transfer. See migrating.md for full 8-step checklist.",
+      "description": "Repo is still under ccarvel's account. Warren's GitHub username and preferred repo name needed to initiate transfer. See TRANSFER.md for full checklist.",
       "severity": "medium",
       "owner": "Cody + Warren Harding"
     },
@@ -30,7 +30,7 @@
   "open_tasks": [
     "Review and commit assets/morejon_01_body.jpg if it is the Morejón portrait replacement; update _writers/morejon.md front matter",
     "Update About paragraph in index.html (still says 'five additional writers currently in development')",
-    "Transfer repo to Warren's GitHub account (see migrating.md)",
+    "Transfer repo to Warren's GitHub account (see TRANSFER.md); confirm final repo name with Warren first",
     "Update url: and baseurl: in _config.yml after transfer",
     "Fix Node.js deprecation: swap peaceiris/actions-gh-pages@v3 → JamesIves/github-pages-deploy-action@v4 (deadline Jun 2 2026; full diff in README)",
     "Fix missing references.bib in _bibliography/",
