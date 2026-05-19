@@ -184,26 +184,97 @@ Commit all the new files through GitHub (or the terminal). The sidebar will auto
 
 ## Section 3: The Zotero-to-Jekyll Pipeline Guide
 
-This site reads bibliography data from `.bib` files exported from **Zotero**. If you add new citations or correct existing ones in Zotero, you must re-export and replace the relevant `.bib` file.
+This site reads bibliography data from `.bib` files exported from **Zotero**. The full pipeline from a Zotero collection to a live bibliography page on the site has four stages:
 
-### How to export from Zotero
+1. Export the collection from Zotero as BibTeX
+2. Normalize the exported file with the `zot-to-jekyll.rb` script
+3. Place the normalized `.bib` file in `_bibliography/<writer>/`
+4. Create (or confirm the existence of) the matching `_texts/<writer>/books.md` page
+
+Each stage is explained below.
+
+---
+
+### Stage 1: Export from Zotero
 
 1. In Zotero, select the collection for the writer you want to export.
 2. Click **File → Export Library** (or right-click the collection and choose **Export Collection**).
 3. In the format dropdown, select **BibTeX**.
 4. Set the encoding to **UTF-8** (this is usually the default).
 5. Leave **"Export Notes"** unchecked.
-6. Save the file with a name matching the existing file (e.g., `books.bib`).
+6. Save the file somewhere easy to find — for example, your Desktop. The filename does not matter at this stage.
 
-### After exporting
+---
 
-Run the normalisation script before replacing the existing `.bib` file. This script fixes formatting differences between Zotero's output and what Jekyll Scholar expects:
+### Stage 2: Normalize the exported file
+
+Zotero sometimes generates citation keys with colons (e.g., `adisa:traveling_1989`). Jekyll Scholar requires underscore-separated keys (`adisa_traveling_1989`). The script `zot-to-jekyll.rb` in the repository root fixes this automatically.
+
+**Before running the script**, open `zot-to-jekyll.rb` in a text editor and update line 6 to point at the file you just exported:
+
+```ruby
+bib_file = '/path/to/your/exported/books.bib'
+```
+
+For example, if you saved the export to your Desktop:
+
+```ruby
+bib_file = '/Users/yourname/Desktop/books.bib'
+```
+
+Then run the script from the repository root:
 
 ```bash
 bundle exec ruby zot-to-jekyll.rb
 ```
 
-Open `zot-to-jekyll.rb` in a text editor first and set the `bib_file` variable at the top to the path of the file you just exported.
+The script overwrites the file in place with corrected keys. It also handles any attached PDFs — you can ignore those warnings if you are not working with PDF attachments.
+
+> **Note:** If you do not have a local Ruby/Bundler environment set up, skip this step and manually check the exported `.bib` file for any keys containing colons. Replace each `:` with `_` before saving.
+
+---
+
+### Stage 3: Place the `.bib` file in `_bibliography/`
+
+Each writer has a subdirectory inside `_bibliography/` named after their `writer_id` (their lowercase last name — e.g., `herrera`, `morejon`). Inside that directory, bibliography files are split by category:
+
+```
+_bibliography/
+  herrera/
+    books.bib
+    articles.bib
+```
+
+Copy or move the normalized `.bib` file into the correct subdirectory, using the appropriate filename (`books.bib` for monographs/collected works, `articles.bib` for journal articles, essays, and chapters).
+
+If the subdirectory does not exist yet (you are adding a brand-new writer), create it first. The folder name must be all lowercase, no spaces, no accent marks — identical to the writer's `writer_id` in their `_writers/*.md` file.
+
+---
+
+### Stage 4: Create the `_texts/` listing page
+
+For each `.bib` file, there must be a matching `.md` file in `_texts/<writer>/`. This is the page that Jekyll builds into a URL and renders the formatted bibliography on.
+
+If the page already exists (e.g., `_texts/herrera/books.md`) you do not need to create it again — just replacing the `.bib` file in Stage 3 is enough for updates.
+
+If the page does **not** exist yet (new writer or new category), create it using the template below. Save it as `_texts/<writer>/books.md` (or `articles.md` for articles):
+
+```markdown
+---
+layout: page
+title: Books
+author: Full Writer Name Here
+editor: Warren Harding
+---
+
+{% bibliography --file writerId/books %}
+```
+
+Replace `Full Writer Name Here` with the writer's full name exactly as it appears in their `_writers/*.md` file, and replace `writerId` in the `{% bibliography %}` tag with the writer's lowercase ID (e.g., `herrera/books`, `morejon/books`).
+
+For an articles page, change `title: Books` to `title: Articles` and `--file writerId/books` to `--file writerId/articles`.
+
+---
 
 ### Citation keys — critical warning
 
@@ -213,6 +284,19 @@ Open `zot-to-jekyll.rb` in a text editor first and set the `bib_file` variable a
 
 The key format used on this site is: `authorlastname_shorttitle_year`
 Example: `brand_nolanguage_1990`
+
+---
+
+### Quick-reference checklist
+
+Use this checklist each time you update or add a bibliography:
+
+- [ ] Exported the correct Zotero collection as BibTeX (UTF-8, no notes)
+- [ ] Updated `bib_file` in `zot-to-jekyll.rb` to point at the export
+- [ ] Ran `bundle exec ruby zot-to-jekyll.rb` (or manually removed colons from keys)
+- [ ] Copied the normalized `.bib` to `_bibliography/<writer>/books.bib` (or `articles.bib`)
+- [ ] Confirmed `_texts/<writer>/books.md` exists (create it if not)
+- [ ] Committed and pushed — site rebuilds automatically within 1–2 minutes
 
 ---
 
