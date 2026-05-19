@@ -338,29 +338,93 @@ assets/herrera.jpg                   ← optional portrait image
 
 ## Build & deployment
 
-### Automated deployment (primary)
+**Why a custom deploy pipeline is needed:** `jekyll-scholar` (the bibliography plugin) is not on the GitHub Pages gem allowlist. GitHub's standard Pages build would silently ignore it. The solution — used by both deployment paths below — is to build the site externally and push only the compiled `_site/` output to the `gh-pages` branch. GitHub Pages then serves that pre-built content directly without running Jekyll again.
 
-Deployment is handled automatically by the GitHub Actions workflow at `.github/workflows/deploy.yml`. Every push to `main` triggers the following steps on GitHub's runners:
+### Automated deployment — GitHub Actions (primary)
 
-1. Check out source
-2. Set up Ruby 3.4 with bundler gem cache
-3. `bundle exec jekyll build` (with `JEKYLL_ENV=production`)
-4. Add `.nojekyll` to prevent GitHub Pages from re-processing the pre-built output
-5. Force-push `_site/` to the `gh-pages` branch via `peaceiris/actions-gh-pages@v3`
+**File:** `.github/workflows/deploy.yml`
 
-You do not need to run any local build commands after pushing. The Actions tab at `https://github.com/ccarvel/warren-jekyll-site/actions` shows a green checkmark when the deploy has completed (typically within 1–2 minutes of pushing).
+Every push to `main` triggers this workflow automatically on GitHub's runners. You never need to run a local build command for a routine update — edit a file, commit, push, and the site is live within 1–2 minutes.
 
-This approach is required because `jekyll-scholar` is not on the GitHub Pages gem allowlist and cannot be built by GitHub's standard Pages pipeline.
+**What the workflow does, step by step:**
 
-### Manual fallback
+| Step | Action |
+|---|---|
+| `actions/checkout@v4` | Checks out the `main` branch source onto the runner |
+| `ruby/setup-ruby@v1` | Installs Ruby 3.4 and restores the full gem bundle from cache (speeds up subsequent runs) |
+| `bundle exec jekyll build` | Compiles the site into `_site/` with `JEKYLL_ENV=production` |
+| `touch _site/.nojekyll` | Writes an empty `.nojekyll` marker — tells GitHub Pages not to re-run Jekyll on the pre-built output (Jekyll excludes dotfiles from `_site/` by default, so this must be an explicit step) |
+| `peaceiris/actions-gh-pages@v3` | Opens a temp workspace, commits the `_site/` contents as a single orphan commit, and force-pushes it to the `gh-pages` branch using `GITHUB_TOKEN` — no credentials or SSH keys required |
 
-The original Rake task remains available if the Actions workflow is unavailable or you need to force a local build:
+**Monitoring a deploy:** open the **Actions** tab at `https://github.com/ccarvel/warren-jekyll-site/actions`. A spinning circle means in progress; a green checkmark means the live site has updated; a red X means the build failed — click the run to read the error log.
+
+**Workflow file annotated:**
+
+```yaml
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main          # fires on every push to main; no other branches trigger it
+
+permissions:
+  contents: write     # allows GITHUB_TOKEN to push to gh-pages
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby and cached gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true   # reads Gemfile.lock; restores gem cache across runs
+
+      - name: Build site with Jekyll
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+
+      - name: Add .nojekyll marker
+        run: touch _site/.nojekyll
+
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          force_orphan: true    # each deploy is a single fresh commit; keeps gh-pages history clean
+```
+
+### Manual fallback — Rake task
+
+**File:** `Rakefile` — task `ed:publish`
+
+Use this when the Actions workflow is unavailable (e.g., GitHub outage, Node.js deprecation break before the workflow is updated) or when you need to force a deploy from a specific local state that hasn't been pushed to `main` yet.
+
+**Prerequisites:** a working local Ruby 3.4 environment with `bundle install` already run.
 
 ```bash
 bundle exec rake ed:publish
 ```
 
-This builds the site locally and force-pushes `_site/` to `gh-pages`. It is no longer needed for routine updates.
+**What the Rake task does, step by step:**
+
+1. Sets `JEKYLL_ENV=production` (matches the Actions workflow environment)
+2. Runs `Jekyll::Site.new(...).process` — equivalent to `bundle exec jekyll build`
+3. Writes `_site/.nojekyll` — same `.nojekyll` marker the Actions workflow adds explicitly
+4. Captures the `origin` remote URL from the local git config
+5. Creates a temporary directory, copies all of `_site/` into it
+6. Inits a fresh git repo in that temp directory, commits all files, adds `origin` as the remote, and force-pushes to `gh-pages` — then the temp directory is deleted automatically
+
+The push authenticates using your local git credential store (same as any `git push`). The result on `gh-pages` is identical to what the Actions workflow produces.
+
+**When not to use it:** do not run `rake ed:publish` for routine updates — push to `main` instead and let Actions handle it. Using both paths for the same commit creates redundant deploys and can cause a race condition if Actions fires at the same time.
 
 ### Node.js deprecation in the deploy workflow
 

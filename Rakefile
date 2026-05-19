@@ -25,12 +25,21 @@ namespace :ed do
 
   desc "Publish ed to gh-pages"
   task :publish do
+    # Set production environment so Jekyll behaves identically to the
+    # GitHub Actions workflow (JEKYLL_ENV=production).
+    ENV["JEKYLL_ENV"] = "production"
+
     # Compile the Jekyll site using the config.
     Jekyll::Site.new(Jekyll.configuration({
       "source"      => ".",
       "destination" => "_site",
       "config" => "_config.yml"
     })).process
+
+    # Prevent GitHub Pages from re-running Jekyll on the pre-built output.
+    # Jekyll excludes dotfiles from _site/ by default, so this must be
+    # written explicitly — mirrors the Actions workflow's nojekyll step.
+    File.write("_site/.nojekyll", "")
 
     # Get the origin to which we are going to push the site.
     origin = `git config --get remote.origin.url`
