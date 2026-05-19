@@ -211,6 +211,54 @@ To normalize a Zotero export before adding entries, update `bib_file` in `zot-to
 bundle exec ruby zot-to-jekyll.rb
 ```
 
+## Search
+
+### How it works
+
+Search is powered by [elasticlunr.js](http://elasticlunr.com/), a lightweight client-side JavaScript library. There is no server-side component — the entire search index is built at Jekyll build time and shipped to the browser as a JavaScript file.
+
+`assets/js/search.js` has `---` front matter, which makes it a Liquid template. During the build, Jekyll processes it, looping over the `site.texts` collection and serializing every document into an elasticlunr index. The browser downloads the pre-built index and runs all queries locally.
+
+### What is searchable
+
+**Searched:** everything in the `_texts/` collection — the bibliography listing pages. For each page, four fields are indexed:
+
+| Field | What it contains |
+|---|---|
+| `title` | The page title from front matter (e.g., "Books", "Articles") |
+| `author` | The writer's full name from front matter (e.g., "Nancy Morejón") |
+| `layout` | The page layout name (e.g., "page") — rarely useful for querying |
+| `content` | The full rendered, HTML-stripped text of the page — this includes all formatted citation text produced by the `{% bibliography %}` tag, so book titles, publisher names, years, and any `annote` annotation text are all searchable |
+
+**Not searched:** writer profile pages (`_writers/`), the homepage, or any page outside the `_texts/` collection. Biographical text, themes, and writer infobox data are not in the search index.
+
+### What happens automatically
+
+Every time a `.bib` file is updated and pushed, the next GitHub Actions build re-generates the index automatically. No manual step is needed — the Liquid template re-runs on every build.
+
+Similarly, adding a new writer (new `_texts/<writer>/books.md` + `_bibliography/<writer>/books.bib`) automatically adds that writer's bibliography to the search index on the next build.
+
+### Extending search to writer profiles
+
+To make writer biographical text searchable, `assets/js/search.js` would need a second loop over `site.writers`. The relevant block currently reads:
+
+```liquid
+{% for text in site.texts %}
+index.addDoc({
+  title: {{text.title | jsonify}},
+  author: {{text.author | jsonify}},
+  layout: {{text.layout | jsonify}},
+  content: {{text.content | jsonify | strip_html}},
+  id: {{count}}
+});{% endfor %}
+```
+
+To also index writer profiles, duplicate that block replacing `site.texts` with `site.writers` and increment `count` across both loops. This is a developer change to `assets/js/search.js` — it does not require changes to any content files.
+
+### Known issue — jQuery dependency
+
+`search.html` loads jQuery 1.11.3 from Google's CDN. This version is over a decade old. It is listed in `TODO.md` for replacement with either a current locally-bundled version or vanilla JavaScript.
+
 ## Adding a new author
 
 Adding an author requires four source pieces: a writer profile page, two bibliography listing pages, and two BibTeX source files. Add a portrait image when a verified image and credit are available. The steps below use `herrera` as an example slug — replace it with the new author's lowercase last name (no spaces, no accent marks).
