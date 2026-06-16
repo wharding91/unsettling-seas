@@ -11,7 +11,23 @@ update the site config, and add Cody as a collaborator.
 
 ---
 
-## Step 0 — Decide the repository name
+## Before the meeting — info to collect in advance
+
+Gather these before you sit down with Warren. Decisions made at the keyboard
+under time pressure lead to typos in config files and broken deploys.
+
+| Item | Why you need it |
+|---|---|
+| Warren's GitHub username (exact, case-sensitive) | Used in every URL and git remote command |
+| Final repository name | Determines the live URL; must be set before the first deploy |
+| Warren's GitHub account email address | Confirms where the transfer invitation and collaborator invite will land |
+| Warren's GitHub account type | Free accounts can receive transferred repos; confirm he has one |
+| Custom domain intentions | If Warren wants `unsettlingseas.org` eventually, note it now — it affects how `baseurl` is set long-term |
+| Warren available to click the transfer email in real time | Transfer is not complete until Warren accepts; plan for him to be at his inbox during Step 2 |
+
+---
+
+## Step 0 — Decide the repository name *(5 min)*
 
 Before initiating the transfer, agree on the final repository name. The name
 determines the live URL (`https://<warren-username>.github.io/<repo-name>/`)
@@ -23,7 +39,7 @@ and must be reflected in several config files.
 |---|---|---|
 | `warren-jekyll-site` (current) | `https://<warren-username>.github.io/warren-jekyll-site/` | No file changes beyond `url:` in `_config.yml` |
 | `unsettling-seas` | `https://<warren-username>.github.io/unsettling-seas/` | Cleaner URL; requires file updates listed below |
-| `unsettling-seas-bibliography` | `https://<warren-username>.github.io/unsettling-seas-bibliography/` | Descriptive; same file updates |
+| `unsettlingseas` | `https://<warren-username>.github.io/unsettlingseas/` | No hyphen; same file updates as above |
 
 GitHub allows renaming a repository at any point — before, during, or after
 the transfer. If you rename before transfer, Cody does it from the current
@@ -66,7 +82,7 @@ these files **before pushing the first deploy** under the new name. A push to
 
 ---
 
-## Step 1 — Transfer the repository
+## Step 1 — Transfer the repository *(5 min)*
 
 Cody does this from the current repo settings.
 
@@ -82,14 +98,14 @@ Warren must click that link — the transfer is not complete until he accepts.
 
 ---
 
-## Step 2 — Warren accepts the transfer
+## Step 2 — Warren accepts the transfer *(2 min)*
 
 Warren opens the email from GitHub and clicks **Accept transfer**. The repo now
 lives at `github.com/<warren-username>/<repo-name>`.
 
 ---
 
-## Step 3 — Add Cody as a collaborator
+## Step 3 — Add Cody as a collaborator *(3 min)*
 
 Warren does this so Cody can continue pushing updates directly.
 
@@ -104,7 +120,7 @@ access is active.
 
 ---
 
-## Step 4 — Enable GitHub Actions and set workflow permissions
+## Step 4 — Enable GitHub Actions and set workflow permissions *(5 min)*
 
 GitHub sometimes disables Actions workflows on transferred repositories as a
 safety measure. Warren must verify they are enabled and correctly permissioned
@@ -125,9 +141,18 @@ first deploy after a transfer.**
 > `permissions: contents: write` is declared in the workflow file. The
 > account-level setting must allow it.
 
+> **Custom theme note:** this site uses a local copy of the Ed theme (not
+> a gem from RubyGems), and `jekyll-scholar` is not on the GitHub Pages
+> allowlist. For both reasons the site **cannot** use GitHub Pages' built-in
+> Jekyll processing. The Actions workflow (`deploy.yml`) builds the site
+> locally with Ruby 3.4 and `bundle exec jekyll build`, then pushes the
+> pre-built `_site/` directory to the `gh-pages` branch. GitHub Pages then
+> serves that static output directly (no re-processing). This is why Pages
+> must be pointed at the `gh-pages` branch (Step 5), not at `main`.
+
 ---
 
-## Step 5 — Enable GitHub Pages
+## Step 5 — Enable GitHub Pages *(3 min)*
 
 1. Go to **https://github.com/<warren-username>/<repo-name>/settings/pages**
 2. Under **Source**, select **"Deploy from a branch"**
@@ -141,7 +166,7 @@ built site, so Pages will serve content immediately after this step.
 
 ---
 
-## Step 6 — Update `_config.yml`
+## Step 6 — Update `_config.yml` *(5 min)*
 
 `url:` always changes on transfer (tied to the GitHub username). `baseurl:`
 and `scholar.relative:` only change if the repo is also being renamed.
@@ -181,7 +206,7 @@ If the repo name changed, also update the documentation files listed in the
 
 ---
 
-## Step 7 — Update the local git remote
+## Step 7 — Update the local git remote *(2 min)*
 
 Cody runs this in the local repo to point to Warren's new URL:
 
@@ -192,7 +217,7 @@ git remote -v   # confirm
 
 ---
 
-## Step 8 — Commit config changes and push
+## Step 8 — Commit config changes and push *(5 min + 1–2 min for Actions to run)*
 
 ```bash
 git add _config.yml
@@ -212,7 +237,7 @@ https://<warren-username>.github.io/<repo-name>/
 
 ---
 
-## Step 9 — Verify
+## Step 9 — Verify *(5 min)*
 
 - [ ] GitHub Actions run shows green at `https://github.com/<warren-username>/<repo-name>/actions`
 - [ ] Homepage loads at `https://<warren-username>.github.io/<repo-name>/`
@@ -238,18 +263,136 @@ If Warren later wants the site at a custom domain (e.g., `unsettlingseas.org`):
 
 ## Summary of who does what
 
-| Step | Who |
+| Step | Who | Est. time |
+|---|---|---|
+| Collect pre-meeting info | Cody + Warren (async) | Before meeting |
+| Decide final repo name | Cody + Warren | 5 min |
+| Rename repo before transfer (if desired) | Cody | 2 min |
+| Initiate transfer | Cody (current owner) | 5 min |
+| Accept transfer | Warren | 2 min |
+| Rename repo after transfer (if not done before) | Warren | 2 min |
+| Add Cody as collaborator | Warren | 3 min |
+| Enable GitHub Actions + set workflow permissions | Warren | 5 min |
+| Enable GitHub Pages (source: gh-pages branch) | Warren | 3 min |
+| Update `_config.yml` | Cody | 5 min |
+| Update documentation files (if repo renamed) | Cody | 10 min |
+| Update local git remote | Cody | 2 min |
+| Commit, push, watch Actions run | Cody | 5 min |
+| Verify live site | Both | 5 min |
+| **Total** | | **~45–55 min** |
+
+---
+
+## Appendix — Complete file edit reference
+
+All edits required for the site to deploy correctly under Warren's ownership,
+assuming the repo is renamed to `unsettling-seas` (adjust if using `unsettlingseas`
+or keeping `warren-jekyll-site`).
+
+### A. `_config.yml` — required, site breaks without these
+
+```yaml
+# Line 8 — was: url: 'https://ccarvel.github.io'
+url: 'https://<warren-username>.github.io'
+
+# Line 9 — was: baseurl: '/warren-jekyll-site'
+baseurl: '/unsettling-seas'
+
+# Line 91 — was: relative: "/warren-jekyll-site/bibliography.html"
+relative: "/unsettling-seas/bibliography.html"
+```
+
+These three values are the only changes needed for the site to build and deploy
+correctly. Everything else in `_config.yml` (title, description, collections,
+scholar settings) stays as-is.
+
+---
+
+### B. `README.md` — documentation accuracy only, site still deploys without these
+
+Four locations reference the old owner/repo name:
+
+1. **Clone URL** (line ~115):
+   ```
+   # was:
+   git clone https://github.com/ccarvel/warren-jekyll-site.git
+   cd warren-jekyll-site
+
+   # change to:
+   git clone https://github.com/<warren-username>/unsettling-seas.git
+   cd unsettling-seas
+   ```
+
+2. **Local dev server note** (line ~126):
+   ```
+   # was: "...overrides the /warren-jekyll-site prefix..."
+   # change /warren-jekyll-site to /unsettling-seas in that sentence
+   ```
+
+3. **htmlproofer swap-urls flag** (line ~132):
+   ```
+   # was:
+   bundle exec htmlproofer ./_site --disable-external --swap-urls '^/warren-jekyll-site/:/'
+
+   # change to:
+   bundle exec htmlproofer ./_site --disable-external --swap-urls '^/unsettling-seas/:/'
+   ```
+
+4. **Actions tab monitoring URL** (line ~407):
+   ```
+   # was: https://github.com/ccarvel/warren-jekyll-site/actions
+   # change to: https://github.com/<warren-username>/unsettling-seas/actions
+   ```
+
+---
+
+### C. `MAINTENANCE.md` — documentation accuracy only
+
+Three locations:
+
+1. **Section 2 — GitHub repo URL**: change `https://github.com/ccarvel/warren-jekyll-site` → `https://github.com/<warren-username>/unsettling-seas`
+2. **Section 4 — local folder name**: change `warren-jekyll-site` → `unsettling-seas` wherever it appears as a folder path
+3. **Section 5 — baseurl example**: change `/warren-jekyll-site` → `/unsettling-seas`
+
+---
+
+### D. `APPS_AND_WORKFLOWS.md` — documentation accuracy only
+
+Two workflows (Task A and Task B) reference the local folder name and the GitHub repo URL:
+
+- Change all instances of `warren-jekyll-site` (as a folder or URL segment) → `unsettling-seas`
+- Change `github.com/ccarvel/` → `github.com/<warren-username>/`
+
+---
+
+### E. `.github/workflows/deploy.yml` — no changes needed
+
+The workflow uses `GITHUB_TOKEN`, which is automatically scoped to whichever
+account owns the repository. It requires no hardcoded usernames or repo names.
+The only prerequisite is that Warren has enabled "Read and write permissions"
+for workflow tokens (Step 4 above).
+
+---
+
+### F. Files that need no changes (auto-update via Liquid)
+
+| File / area | Reason |
 |---|---|
-| Decide final repo name | Cody + Warren |
-| Rename repo before transfer (if desired) | Cody |
-| Initiate transfer | Cody (current owner) |
-| Accept transfer | Warren |
-| Rename repo after transfer (if not done before) | Warren |
-| Add Cody as collaborator | Warren |
-| Enable GitHub Actions + set workflow permissions | Warren |
-| Enable GitHub Pages (source: gh-pages branch) | Warren |
-| Update `_config.yml` | Cody |
-| Update documentation files (if repo renamed) | Cody |
-| Update local git remote | Cody |
-| Commit, push, watch Actions run | Cody |
-| Verify live site | Both |
+| `site.webmanifest` | Uses `{{ site.baseurl }}` |
+| All `_includes/` and `_layouts/` | Use `{{ site.baseurl }}` or `relative_url` filter |
+| `_writers/*.md` image paths | Go through the writer infobox include via `relative_url` |
+| `_bibliography/` BibTeX files | No URL references |
+| `_sass/`, `assets/` | No URL references |
+
+---
+
+### G. Summary: minimum viable edit set
+
+To get the site live with zero broken links after transfer and rename:
+
+1. Edit `_config.yml` — 3 field values (url, baseurl, scholar.relative)
+2. Update git remote locally — 1 command
+3. Commit and push — triggers Actions, site deploys automatically
+
+Documentation files (README, MAINTENANCE, APPS_AND_WORKFLOWS) can be updated
+in a follow-up commit and do not block the deploy.
