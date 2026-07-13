@@ -112,8 +112,8 @@ Bibliographic resources for Caribbean women's and feminist creative writing, 198
 ### Setup
 
 ```bash
-git clone https://github.com/ccarvel/warren-jekyll-site.git
-cd warren-jekyll-site
+git clone https://github.com/ccarvel/unsettling-seas.git
+cd unsettling-seas
 bundle install
 ```
 
@@ -123,13 +123,13 @@ bundle install
 bundle exec jekyll serve --baseurl ""
 ```
 
-The site is available at `http://127.0.0.1:4000/`. The `--baseurl ""` flag overrides the `/warren-jekyll-site` prefix used on the live site — without it, WEBrick 404s on the root URL instead of serving the homepage.
+The site is available at `http://127.0.0.1:4000/unsettling-seas/`. The `--baseurl ""` flag overrides the `/unsettling-seas` prefix used on the live site — without it, WEBrick 404s on the root URL instead of serving the homepage.
 
 To validate links and markup after a build:
 
 ```bash
 bundle exec jekyll build
-bundle exec htmlproofer ./_site --disable-external --swap-urls '^/warren-jekyll-site/:/'
+bundle exec htmlproofer ./_site --disable-external --swap-urls '^/unsettling-seas/:/'
 ```
 
 The `--swap-urls` option lets html-proofer resolve links that include the GitHub Pages `baseurl` while checking the local `_site/` directory. Remove `--disable-external` when you intentionally want to check outbound links too.
@@ -404,7 +404,7 @@ Every push to `main` triggers this workflow automatically on GitHub's runners. Y
 | `touch _site/.nojekyll` | Writes an empty `.nojekyll` marker — tells GitHub Pages not to re-run Jekyll on the pre-built output (Jekyll excludes dotfiles from `_site/` by default, so this must be an explicit step) |
 | `peaceiris/actions-gh-pages@v3` | Opens a temp workspace, commits the `_site/` contents as a single orphan commit, and force-pushes it to the `gh-pages` branch using `GITHUB_TOKEN` — no credentials or SSH keys required |
 
-**Monitoring a deploy:** open the **Actions** tab at `https://github.com/ccarvel/warren-jekyll-site/actions`. A spinning circle means in progress; a green checkmark means the live site has updated; a red X means the build failed — click the run to read the error log.
+**Monitoring a deploy:** open the **Actions** tab at `https://github.com/ccarvel/unsettling-seas/actions`. A spinning circle means in progress; a green checkmark means the live site has updated; a red X means the build failed — click the run to read the error log.
 
 **Workflow file annotated:**
 
@@ -564,7 +564,7 @@ At the end of any AI session, run `--status --log --summary "..." --next-step ".
 
 ## Contributing
 
-Open an issue or pull request on [GitHub](https://github.com/ccarvel/warren-jekyll-site). For bibliography additions, follow the BibTeX key convention and per-writer file structure described above.
+Open an issue or pull request on [GitHub](https://github.com/ccarvel/unsettling-seas). For bibliography additions, follow the BibTeX key convention and per-writer file structure described above.
 
 ## License
 

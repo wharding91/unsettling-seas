@@ -36,7 +36,7 @@ This setup lets you write and edit Markdown files in an app that shows you a liv
 
 **Installation:** Each app downloads as a `.dmg` file. Open it, drag the app icon into your **Applications** folder, and you are done.
 
-> **Tip:** After installing GitHub Desktop, sign in with your GitHub account credentials and click **"Clone a Repository."** Find `warren-jekyll-site` in the list and choose a local folder for it on your Mac. This downloads the site files so you can open and edit them locally.
+> **Tip:** After installing GitHub Desktop, sign in with your GitHub account credentials and click **"Clone a Repository."** Find `unsettling-seas` in the list and choose a local folder for it on your Mac. This downloads the site files so you can open and edit them locally.
 
 ---
 
@@ -105,7 +105,7 @@ These two tasks cover 90% of routine site maintenance. Each workflow is written 
   Open **GitHub Desktop**. At the top of the window, click **"Fetch Origin."** If the button changes to **"Pull Origin"** with a number next to it, click it again to download any recent changes. This ensures you are not editing an out-of-date copy.
 
 - [ ] **Step 2 — Open and edit the writer file.**
-  In VS Code, use **File → Open Folder** and select the `warren-jekyll-site` folder on your Mac. In the left file panel, navigate to the **`_writers/`** folder and click the file you want to edit. The seven available files are:
+  In VS Code, use **File → Open Folder** and select the `unsettling-seas` folder on your Mac. In the left file panel, navigate to the **`_writers/`** folder and click the file you want to edit. The seven available files are:
 
   | Writer | File |
   |---|---|
@@ -141,7 +141,7 @@ Use this workflow whenever you have exported updated citation data from Zotero a
   In Zotero, right-click the collection for the writer whose bibliography you are updating and choose **"Export Collection."** Select **BibTeX** as the format, confirm the encoding is **UTF-8**, leave "Export Notes" unchecked, and save the file to your Mac's **Downloads** folder. Name it to match the file it will replace — for example: `books.bib` or `articles.bib`.
 
 - [ ] **Step 2 — Move the file into the repository using Finder.**
-  Open a **Finder** window and navigate to your local `warren-jekyll-site` folder. Open the `_bibliography/` folder, then open the subfolder for the writer you are updating (e.g., `_bibliography/adisa/` or `_bibliography/brand/`). Drag the newly exported `.bib` file from your Downloads folder into this subfolder. When macOS asks if you want to replace the existing file, click **Replace.**
+  Open a **Finder** window and navigate to your local `unsettling-seas` folder. Open the `_bibliography/` folder, then open the subfolder for the writer you are updating (e.g., `_bibliography/adisa/` or `_bibliography/brand/`). Drag the newly exported `.bib` file from your Downloads folder into this subfolder. When macOS asks if you want to replace the existing file, click **Replace.**
 
   > **Tip:** If you are adding bibliography files for a brand-new writer rather than replacing an existing one, create a new subfolder named after the writer's ID (all lowercase, no accents — e.g., `cliff` for Michelle Cliff) and drop `books.bib` and `articles.bib` inside it. The folder name must match the `writer_id:` value in the writer's profile page. See `MAINTENANCE.md` for the complete new-writer checklist.
 
