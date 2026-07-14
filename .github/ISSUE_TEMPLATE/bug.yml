@@ -1,0 +1,19 @@
+name: Bug Report
+description: Report a broken element on the site.
+title: "[Bug]: "
+labels: ["bug"]
+assignees:
+  - your-github-username
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: What is broken?
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Specific page or URL
+      description: Where does the bug occur?

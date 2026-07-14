@@ -1,0 +1,19 @@
+name: Feature Request
+description: Request a new feature for the site.
+title: "[Feature]: "
+labels: ["enhancement"]
+assignees:
+  - your-github-username
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Details
+      description: What new functionality is needed?
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Specific page or URL
+      description: Where should this feature appear?

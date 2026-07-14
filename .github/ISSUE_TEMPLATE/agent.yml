@@ -1,0 +1,14 @@
+name: Agent Task
+description: Queue a technical task for CLI agent execution.
+title: "[Agent]: "
+labels: ["agent-task"]
+assignees:
+  - your-github-username
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Task Description
+      description: Detail the task requirements for the CLI agent.
+    validations:
+      required: true

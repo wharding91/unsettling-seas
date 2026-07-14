@@ -1,0 +1,14 @@
+name: Configuration Update
+description: Modify site-wide variables, navigation, or settings.
+title: "[Config]: "
+labels: ["config"]
+assignees:
+  - your-github-username
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Configuration Details
+      description: What settings or variables need to be changed?
+    validations:
+      required: true

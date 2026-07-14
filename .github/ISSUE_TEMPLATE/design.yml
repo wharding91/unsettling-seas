@@ -1,0 +1,19 @@
+name: Design Change
+description: Request visual, CSS, or layout adjustments.
+title: "[Design]: "
+labels: ["design"]
+assignees:
+  - your-github-username
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Design Requirements
+      description: Describe the visual changes needed.
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Specific page or URL
+      description: Which pages are affected?
