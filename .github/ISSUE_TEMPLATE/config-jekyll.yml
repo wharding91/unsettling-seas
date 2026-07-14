@@ -1,4 +1,4 @@
-name: Configuration Update
+name: jekyll _config.yml Update
 description: Modify site-wide variables, navigation, or settings.
 title: "[Config]: "
 labels: ["config"]
