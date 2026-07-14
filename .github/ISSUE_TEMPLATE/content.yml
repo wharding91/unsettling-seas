@@ -1,0 +1,19 @@
+name: Content Update
+description: Add or modify text, posts, or images.
+title: "[Content]: "
+labels: ["content"]
+assignees:
+  - your-github-username
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Content Details
+      description: What text needs updating or what new post should be added?
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Specific page or URL
+      description: Where should this content go?

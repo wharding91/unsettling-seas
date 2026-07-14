@@ -112,7 +112,7 @@ Bibliographic resources for Caribbean women's and feminist creative writing, 198
 ### Setup
 
 ```bash
-git clone https://github.com/ccarvel/unsettling-seas-1.git
+git clone https://github.com/wharding91/unsettling-seas-1.git
 cd unsettling-seas-1
 bundle install
 ```
@@ -404,7 +404,7 @@ Every push to `main` triggers this workflow automatically on GitHub's runners. Y
 | `touch _site/.nojekyll` | Writes an empty `.nojekyll` marker — tells GitHub Pages not to re-run Jekyll on the pre-built output (Jekyll excludes dotfiles from `_site/` by default, so this must be an explicit step) |
 | `peaceiris/actions-gh-pages@v3` | Opens a temp workspace, commits the `_site/` contents as a single orphan commit, and force-pushes it to the `gh-pages` branch using `GITHUB_TOKEN` — no credentials or SSH keys required |
 
-**Monitoring a deploy:** open the **Actions** tab at `https://github.com/ccarvel/unsettling-seas-1/actions`. A spinning circle means in progress; a green checkmark means the live site has updated; a red X means the build failed — click the run to read the error log.
+**Monitoring a deploy:** open the **Actions** tab at `https://github.com/wharding91/unsettling-seas-1/actions`. A spinning circle means in progress; a green checkmark means the live site has updated; a red X means the build failed — click the run to read the error log.
 
 **Workflow file annotated:**
 
@@ -538,7 +538,7 @@ This repo uses a lightweight multi-agent handoff system to preserve context acro
 | `AI_WORK_LOG.md` | Append-only log of what each session did and decided |
 | `ai_status.json` | Current focus, exact next step, blockers, current git SHA |
 
-`scripts/update_relay_state.py` manages these files from the command line. It requires Python 3 and no external dependencies. It is also available globally as `update_relay_state` if the [relay skills](https://github.com/ccarvel/agent-relay) `install.sh` has been run.
+`scripts/update_relay_state.py` manages these files from the command line. It requires Python 3 and no external dependencies. It is also available globally as `update_relay_state` if the [relay skills](https://github.com/wharding91/agent-relay) `install.sh` has been run.
 
 ```bash
 # Print current state
@@ -564,7 +564,7 @@ At the end of any AI session, run `--status --log --summary "..." --next-step ".
 
 ## Contributing
 
-Open an issue or pull request on [GitHub](https://github.com/ccarvel/unsettling-seas-1). For bibliography additions, follow the BibTeX key convention and per-writer file structure described above.
+Open an issue or pull request on [GitHub](https://github.com/wharding91/unsettling-seas-1). For bibliography additions, follow the BibTeX key convention and per-writer file structure described above.
 
 ## License
 

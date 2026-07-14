@@ -38,7 +38,7 @@ and must be reflected in several config files.
 | Name | Live URL | Notes |
 |---|---|---|
 | `warren-jekyll-site` (current) | `https://ccarvel.github.io/warren-jekyll-site/` | No file changes beyond `url:` in `_config.yml` |
-| `unsettling-seas` | `https://wharding91.github.io/unsettling-seas/` | Cleaner URL; requires file updates listed below |
+| `unsettling-seas` | `https://wharding91.github.io/unsettling-seas-1/` | Cleaner URL; requires file updates listed below |
 
 GitHub allows renaming a repository at any point — before, during, or after
 the transfer. If you rename before transfer, Cody does it from the current

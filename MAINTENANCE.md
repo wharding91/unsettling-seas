@@ -57,7 +57,7 @@ born: "6 November 1954"
 
 You can make small text changes directly on the GitHub website without installing anything.
 
-1. Go to the repository page on **GitHub** (e.g., `https://github.com/ccarvel/unsettling-seas).
+1. Go to the repository page on **GitHub** (e.g., `https://github.com/ccarvel/unsettling-seas-1).
 2. Click on the file you want to edit — for example, `_writers/brand.md`.
 3. Click the **pencil icon** (✏) in the top-right corner of the file view. This opens the in-browser editor.
 4. Make your changes to the **biographical text** (the content below the second `---` line). Do not edit the front matter block unless you are confident about the exact format.
@@ -314,7 +314,7 @@ If you want to preview changes on your own computer before they go live, you nee
 
 - [ ] Open Terminal and navigate to the repository folder:
   ```bash
-  cd /path/to/unsettling-seas
+  cd /path/to/unsettling-seas-1
   ```
 - [ ] Install all gem dependencies (run once, then only when `Gemfile` changes):
   ```bash
@@ -337,7 +337,7 @@ Copy that URL (`http://127.0.0.1:4000/`) and paste it into your web browser. The
 
 To stop the server, press **`Ctrl + C`** in the terminal.
 
-> **Note:** The `--baseurl ""` flag overrides the `/unsettling-seas` path prefix used on the live GitHub Pages site. Without it, the local server redirects the root URL to `/unsettling-seas` and WEBrick returns a 404. With the flag, the site is available directly at `http://127.0.0.1:4000/` and all navigation works normally.
+> **Note:** The `--baseurl ""` flag overrides the `/unsettling-seas-1` path prefix used on the live GitHub Pages site. Without it, the local server redirects the root URL to `/unsettling-seas-1` and WEBrick returns a 404. With the flag, the site is available directly at `http://127.0.0.1:4000/` and all navigation works normally.
 
 ---
 
@@ -363,10 +363,10 @@ To stop the server, press **`Ctrl + C`** in the terminal.
 
 **Symptom:** Running `bundle exec jekyll serve` shows the site correctly, but after deploying to GitHub Pages, the CSS is missing, images don't load, or links lead to 404 pages.
 
-**Cause:** The live site is served from a sub-path (e.g., `https://username.github.io/unsettling-seas/`), which means all internal links must begin with `/unsettling-seas/`. The `baseurl` setting in `_config.yml` tells Jekyll to add this prefix automatically. When you preview locally, Jekyll uses a different `baseurl` (usually empty), so local previews can mask this class of bug.
+**Cause:** The live site is served from a sub-path (e.g., `https://username.github.io/unsettling-seas-1/`), which means all internal links must begin with `/unsettling-seas-1/`. The `baseurl` setting in `_config.yml` tells Jekyll to add this prefix automatically. When you preview locally, Jekyll uses a different `baseurl` (usually empty), so local previews can mask this class of bug.
 
 **What to check:**
-1. Open `_config.yml` and confirm that `baseurl:` is set to `/unsettling-seas` (or whatever the correct sub-path is for the live site's URL).
+1. Open `_config.yml` and confirm that `baseurl:` is set to `/unsettling-seas-1` (or whatever the correct sub-path is for the live site's URL).
 2. If the repository has been transferred to a new GitHub account, the `url:` and `baseurl:` values will need to be updated to reflect the new username and repository name.
 3. Never hardcode paths like `/assets/image.jpg` in writer pages — always use `{{ site.baseurl }}/assets/image.jpg` or `{{ '/assets/image.jpg' | relative_url }}`. All existing writer pages already follow this convention.
 
